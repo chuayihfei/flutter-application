@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
@@ -6,7 +8,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 class HomeScreen extends StatefulWidget
@@ -97,12 +101,165 @@ class HomeScreenState extends State<HomeScreen>
       }
       else
       {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: const Text("Invalid Page!"),
-          duration: const Duration(seconds: 5),
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Invalid Page!"),
+          duration: Duration(seconds: 5),
           backgroundColor: Colors.red,
           ));
       }
     }
+  }
+
+  @override
+  void initState()
+  {
+    super.initState();
+
+    getInitialMessage();
+
+    FirebaseMessaging.onMessage.listen((message) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message.data["myname"].toString()),
+        duration: const Duration(seconds: 10),
+        backgroundColor: Colors.green
+        ));
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("App was opened by a notification"),
+        duration: Duration(seconds: 10),
+        backgroundColor: Colors.green
+        ));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              logOut();
+            },
+            icon: const Icon(Icons.exit_to_app),
+          ),
+        ],
+      ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                CupertinoButton(
+                  onPressed: () async {
+                    XFile? selectedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+                    if (selectedImage != null)
+                    {
+                      File convertedFile = File(selectedImage.path);
+                      setState(() {
+                        profilePic = convertedFile;
+                      });
+                      log("Image selected");
+                    }
+                    else
+                    {
+                      log("No image selected");
+                    }
+                  },
+                  padding: EdgeInsets.zero,
+                  child: CircleAvatar(
+                    radius: 40,
+                    backgroundImage: (profilePic != null) ? FileImage(profilePic!) : null,
+                    backgroundColor:  Colors.grey,
+                    ),
+                ),
+                
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                  hintText: "Name"
+                  ),
+                ),
+
+                const SizedBox(height: 10,),
+
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    hintText: "Email Address"
+                    ),
+                ),
+
+                const SizedBox(height: 10,),
+
+                TextField(
+                  controller: ageController,
+                  decoration: const InputDecoration(
+                    hintText: "Age"
+                    ),
+                ),
+
+                const SizedBox(height: 10),
+                
+                CupertinoButton(
+                  onPressed: () {
+                    saveUser();
+                  },
+                  child: const Text("Save"),
+                ),
+
+                const SizedBox(height: 20), 
+
+                StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance.collection("users").where("age", isGreaterThanOrEqualTo: 19).orderBy("age", descending: true).snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) 
+                    {
+                      if (snapshot.hasData && snapshot.data != null)
+                      {
+                        return Expanded(
+                          child: ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> userMap = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+
+                              return ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: NetworkImage(userMap["profilePic"]),
+                                ),
+                                title: Text(userMap["name"] + "(${userMap["age"]})"),
+                                subtitle: Text(userMap["email"]),
+                                trailing: IconButton(
+                                  onPressed: () {
+
+                                  },
+                                  icon: const Icon(Icons.delete),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      }
+                      else
+                      {
+                        return const Text("No Data!");
+                      }
+                    }
+                    else 
+                    {
+                      return const Center(child: CircularProgressIndicator(),);
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+    );
   }
 }
