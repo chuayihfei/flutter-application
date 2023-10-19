@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home_screen.dart';
+import 'package:flutter_application_1/screens/email_auth/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget
 {
@@ -92,9 +93,9 @@ class LoginScreenState extends State<LoginScreen>
 
                   CupertinoButton(
                     onPressed: () {
-                      // Navigator.push(context, CupertinoPageRoute(
-                      //   builder: (context) => SignUpScreen()
-                      //   ));
+                      Navigator.push(context, CupertinoPageRoute(
+                        builder: (context) => const SignUpScreen()
+                        ));
                     },
                     child: const Text("Create an Account"),
                   )
