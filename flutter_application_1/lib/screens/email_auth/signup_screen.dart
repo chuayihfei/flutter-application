@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
@@ -13,16 +14,18 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController cPasswordController = TextEditingController();
 
   void createAccount() async {
+    String name = nameController.text.trim();
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String cPassword = cPasswordController.text.trim();
 
-    if (email == "" || password == "" || cPassword == "") {
+    if (name == "" || email == "" || password == "" || cPassword == "") {
       log("Please fill all the details!");
     } else if (password != cPassword) {
       log("Passwords do not match!");
@@ -31,6 +34,14 @@ class SignUpScreenState extends State<SignUpScreen> {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
         if (userCredential.user != null) {
+          DatabaseReference ref = FirebaseDatabase.instance.ref("users/$name");
+          await ref.set({
+            "name": name,
+            "email": email,
+            "userId": userCredential.user?.uid.toString()
+          });
+
+          log("User Created!");
           Navigator.pop(context);
         }
       } on FirebaseAuthException catch (ex) {
@@ -53,6 +64,13 @@ class SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.all(15),
                   child: Column(
                     children: [
+                      TextField(
+                        controller: nameController,
+                        decoration: const InputDecoration(labelText: "Name"),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       TextField(
                         controller: emailController,
                         decoration:
