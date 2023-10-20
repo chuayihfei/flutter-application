@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBCV3BC-DngJwLrF9qvypT5us9zE28nt44',
-    appId: '1:763717745226:web:0964008beaeb2307e104b3',
-    messagingSenderId: '763717745226',
-    projectId: 'flutter-application-62cb8',
-    authDomain: 'flutter-application-62cb8.firebaseapp.com',
-    storageBucket: 'flutter-application-62cb8.appspot.com',
-    measurementId: 'G-LQFV3MZYCW',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAszOvEVh0gyBSbQextf7oWO0bS9yHPqGY',
     appId: '1:763717745226:android:854df65723f25344e104b3',
@@ -68,14 +64,5 @@ class DefaultFirebaseOptions {
     projectId: 'flutter-application-62cb8',
     storageBucket: 'flutter-application-62cb8.appspot.com',
     iosBundleId: 'com.example.flutterApplication1',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDMA05var869MZdkHIIbYKDAsm7jc-XAkM',
-    appId: '1:763717745226:ios:f9d6d106ebfb9aa4e104b3',
-    messagingSenderId: '763717745226',
-    projectId: 'flutter-application-62cb8',
-    storageBucket: 'flutter-application-62cb8.appspot.com',
-    iosBundleId: 'com.example.flutterApplication1.RunnerTests',
   );
 }
