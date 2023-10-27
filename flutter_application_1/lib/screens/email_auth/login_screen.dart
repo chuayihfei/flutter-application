@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/home_screen_1.dart';
+import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/screens/email_auth/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
