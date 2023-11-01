@@ -32,6 +32,10 @@ class CheckInScreenState extends State<CheckInScreen> {
     }
   }
 
+  void onUnityMessage(message) {
+    log("Received message from Unity: ${message.toString()}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +55,7 @@ class CheckInScreenState extends State<CheckInScreen> {
                 child: UnityWidget(
                   onUnityCreated: onUnityCreated,
                   onUnitySceneLoaded: onUnitySceneLoaded,
+                  onUnityMessage: onUnityMessage,
                   fullscreen: false,
                 ),
               ),

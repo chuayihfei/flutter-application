@@ -4,12 +4,17 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using FlutterUnityIntegration;
 
 public class ImageTracking : MonoBehaviour
 {
     private ARTrackedImageManager m_tImageManager;
     public string m_CheckedInPage;
 
+    private UnityMessageManager Manager
+    {
+        get { return GetComponent<UnityMessageManager>(); }
+    }
 
     private void Awake()
     {
@@ -29,17 +34,22 @@ public class ImageTracking : MonoBehaviour
     {
         foreach (ARTrackedImage trackedImage in eventArgs.added)
         {
-            //updateScene(trackedImage);
+            sendName(trackedImage);
         }
 
         foreach (ARTrackedImage trackedImage in eventArgs.updated)
         {
-            //updateScene(trackedImage);
+            sendName(trackedImage);
         }
 
         foreach (ARTrackedImage trackedImage in eventArgs.removed)
         {
 
         }
+    }
+
+    private void sendName(ARTrackedImage trackedImage)
+    {
+        Manager.SendMessageToFlutter(trackedImage.referenceImage.name);
     }
 }
