@@ -3,19 +3,21 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/check_in/check_in.dart';
 import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
+import 'package:flutter_application_1/screens/home_screens/home_screen_before.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreenAfter extends StatefulWidget {
+  const HomeScreenAfter({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => HomeScreenState();
+  State<HomeScreenAfter> createState() => HomeScreenAfterState();
 }
 
-class HomeScreenState extends State<HomeScreen> {
+class HomeScreenAfterState extends State<HomeScreenAfter> {
   void logOut() async {
     await FirebaseAuth.instance.signOut();
 
@@ -24,11 +26,18 @@ class HomeScreenState extends State<HomeScreen> {
         context, CupertinoPageRoute(builder: (context) => const LoginScreen()));
   }
 
-  void checkIn() async {
-    log("Check In Button Pressed!");
+  void checkOut() async {
+    log("Check Out Button Pressed!");
+    User? user = FirebaseAuth.instance.currentUser;
+    DatabaseReference ref =
+        FirebaseDatabase.instance.ref("users/${user?.uid.toString()}");
+    await ref.update({
+      "Location": "",
+      "Checked In": false,
+    });
     Navigator.popUntil(context, (route) => route.isFirst);
     Navigator.pushReplacement(context,
-        CupertinoPageRoute(builder: (context) => const CheckInScreen()));
+        CupertinoPageRoute(builder: (context) => const HomeScreenBefore()));
   }
 
   void groupChat() async {
@@ -62,9 +71,9 @@ class HomeScreenState extends State<HomeScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      checkIn();
+                      checkOut();
                     },
-                    child: Text("Check In"),
+                    child: Text("Check Out"),
                   ),
                 ]))
           ],

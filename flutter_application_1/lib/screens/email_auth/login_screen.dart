@@ -1,9 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/home_screen.dart';
+import 'package:flutter_application_1/screens/home_screens/home_screen_after.dart';
+import 'package:flutter_application_1/screens/home_screens/home_screen_before.dart';
 import 'package:flutter_application_1/screens/email_auth/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -28,9 +32,24 @@ class LoginScreenState extends State<LoginScreen> {
         UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
         if (userCredential.user != null) {
-          Navigator.popUntil(context, (route) => route.isFirst);
-          Navigator.pushReplacement(context,
-              CupertinoPageRoute(builder: (context) => const HomeScreen()));
+          final ref = FirebaseDatabase.instance.ref();
+          final snapshot = await ref
+              .child("users/${userCredential.user?.uid.toString()}")
+              .child("Checked In")
+              .get();
+          if (snapshot.exists && snapshot.value == true) {
+            Navigator.popUntil(context, (route) => route.isFirst);
+            Navigator.pushReplacement(
+                context,
+                CupertinoPageRoute(
+                    builder: (context) => const HomeScreenAfter()));
+          } else {
+            Navigator.popUntil(context, (route) => route.isFirst);
+            Navigator.pushReplacement(
+                context,
+                CupertinoPageRoute(
+                    builder: (context) => const HomeScreenBefore()));
+          }
         }
       } on FirebaseAuthException catch (ex) {
         log(ex.code.toString());
