@@ -34,7 +34,8 @@ class SignUpScreenState extends State<SignUpScreen> {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
         if (userCredential.user != null) {
-          DatabaseReference ref = FirebaseDatabase.instance.ref("users/$name");
+          DatabaseReference ref = FirebaseDatabase.instance
+              .ref("users/${userCredential.user?.uid.toString()}");
           await ref.set({
             "name": name,
             "email": email,

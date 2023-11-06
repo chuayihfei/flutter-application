@@ -1,7 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -32,8 +37,18 @@ class CheckInScreenState extends State<CheckInScreen> {
     }
   }
 
-  void onUnityMessage(message) {
+  void onUnityMessage(message) async {
     log("Received message from Unity: ${message.toString()}");
+    User? user = FirebaseAuth.instance.currentUser;
+    DatabaseReference ref =
+        FirebaseDatabase.instance.ref("users/${user?.uid.toString()}");
+    await ref.update({
+      "Location": message.toString(),
+      "Checked In": true,
+    });
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushReplacement(
+        context, CupertinoPageRoute(builder: (context) => const HomeScreen()));
   }
 
   @override

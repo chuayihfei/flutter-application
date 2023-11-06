@@ -39,7 +39,7 @@ public class ImageTracking : MonoBehaviour
 
         foreach (ARTrackedImage trackedImage in eventArgs.updated)
         {
-            sendName(trackedImage);
+            //sendName(trackedImage);
         }
 
         foreach (ARTrackedImage trackedImage in eventArgs.removed)
