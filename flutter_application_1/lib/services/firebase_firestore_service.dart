@@ -11,13 +11,11 @@ class FirebaseFirestoreService {
 
   static Future<void> createUser({
     required String name,
-    required String image,
     required String email,
     required uid,
   }) async {
     final user = UserModel(
         name: name,
-        image: image,
         lastActive: DateTime.now(),
         uid: uid,
         email: email,

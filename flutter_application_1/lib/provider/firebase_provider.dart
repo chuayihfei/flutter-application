@@ -13,7 +13,7 @@ class FirebaseProvider extends ChangeNotifier {
   List<Message> messages = [];
   List<UserModel> search = [];
 
-  List<UserModel> getAllUsers() {
+  Future<List<UserModel>> getAllUsers() async {
     FirebaseFirestore.instance
         .collection('users')
         .orderBy('lastActive', descending: true)

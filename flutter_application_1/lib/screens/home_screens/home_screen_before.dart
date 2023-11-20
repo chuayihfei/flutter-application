@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/check_in/check_in.dart';
 import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
+import 'package:flutter_application_1/screens/group_chat/chats_screen.dart';
 
 class HomeScreenBefore extends StatefulWidget {
   const HomeScreenBefore({Key? key}) : super(key: key);
@@ -33,9 +34,9 @@ class HomeScreenBeforeState extends State<HomeScreenBefore> {
 
   void groupChat() async {
     log("Group Chat Button Pressed!");
-    // Navigator.popUntil(context, (route) => route.isFirst);
-    // Navigator.pushReplacement(
-    //     context, CupertinoPageRoute(builder: (context) => const LoginScreen()));
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushReplacement(
+        context, CupertinoPageRoute(builder: (context) => const ChatsScreen()));
   }
 
   @override

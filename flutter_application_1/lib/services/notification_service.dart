@@ -22,7 +22,8 @@ class NotificationService {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   void initLocalNotification() {
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcer');
+    const androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const iosSettings = DarwinInitializationSettings(
         requestAlertPermission: true,
@@ -33,7 +34,7 @@ class NotificationService {
     const initializationSettings =
         InitializationSettings(android: androidSettings, iOS: iosSettings);
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveBackgroundNotificationResponse: (response) {
+        onDidReceiveNotificationResponse: (response) {
       debugPrint(response.payload.toString());
     });
   }

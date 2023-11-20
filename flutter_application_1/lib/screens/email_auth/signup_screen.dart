@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -34,13 +35,19 @@ class SignUpScreenState extends State<SignUpScreen> {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
         if (userCredential.user != null) {
-          DatabaseReference ref = FirebaseDatabase.instance
-              .ref("users/${userCredential.user?.uid.toString()}");
-          await ref.set({
-            "name": name,
-            "email": email,
-            "userId": userCredential.user?.uid.toString()
-          });
+          // DatabaseReference ref = FirebaseDatabase.instance
+          //     .ref("users/${userCredential.user?.uid.toString()}");
+          // await ref.set({
+          //   "name": name,
+          //   "email": email,
+          //   "userId": userCredential.user?.uid.toString()
+          // });
+          await FirebaseFirestoreService.createUser(
+            //image: image,
+            email: email,
+            uid: userCredential.user?.uid.toString(),
+            name: nameController.text,
+          );
 
           log("User Created!");
           Navigator.pop(context);
