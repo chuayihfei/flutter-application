@@ -13,11 +13,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Indicator
+  - Obstacles
+  - Floor
+  - Wall
+  - Floorplan
   - 
   - 
   - 

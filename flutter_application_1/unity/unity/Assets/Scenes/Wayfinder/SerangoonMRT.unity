@@ -1229,7 +1229,7 @@ Transform:
   m_GameObject: {fileID: 237177365}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.078459114, z: -0, w: 0.99691737}
-  m_LocalPosition: {x: 1.2, y: 7.35, z: 37.47}
+  m_LocalPosition: {x: 1.2, y: 7.25, z: 37.47}
   m_LocalScale: {x: 9.5, y: 0.2, z: 7.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8636,9 +8636,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 19473e661fa5d7747b78871d91e580b6, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b0cda61a8f58d45468456e48cd663af8, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1613816884
 GameObject:
@@ -10253,7 +10253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1972845198
 Transform:
   m_ObjectHideFlags: 0
@@ -10980,8 +10980,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_StartPoint: {x: 0, y: -2.57, z: 0}
-  m_EndPoint: {x: 0, y: 2.57, z: 0}
+  m_StartPoint: {x: 0, y: 0, z: -2.5}
+  m_EndPoint: {x: 0, y: 0, z: 2.5}
   m_Width: 0
   m_CostModifier: -1
   m_Bidirectional: 1
