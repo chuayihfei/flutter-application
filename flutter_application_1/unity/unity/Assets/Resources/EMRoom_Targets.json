@@ -1,0 +1,85 @@
+{
+	"listTargets": [
+		{
+			"Name": "Origin",
+			"Position": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Entrance 1",
+			"Position": {
+				"x": 11,
+				"y": -0.5,
+				"z": -6
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Weilin's Table",
+			"Position": {
+				"x": -1.2,
+				"y": -0.5,
+				"z": -2.28
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Yih Fei's Table",
+			"FloorNumber": 0,
+			"Position": {
+				"x": -3.45,
+				"y": -0.5,
+				"z": -2.28
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Discussion Area",
+			"FloorNumber": 0,
+			"Position": {
+				"x": 11.0,
+				"y": -0.5,
+				"z": 5.0
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Thiam Siew's Table",
+			"FloorNumber": 0,
+			"Position": {
+				"x": 12.0,
+				"y": -0.5,
+				"z": 2.0
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -90.0,
+				"z": 0.0
+			}
+		}
+	]
+}
