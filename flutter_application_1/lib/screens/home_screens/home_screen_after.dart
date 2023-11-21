@@ -47,6 +47,13 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
     //     context, CupertinoPageRoute(builder: (context) => const LoginScreen()));
   }
 
+  void wayFinder() async {
+    log("Way Finder Button Pressed!");
+    // Navigator.popUntil(context, (route) => route.isFirst);
+    // Navigator.pushReplacement(
+    //     context, CupertinoPageRoute(builder: (context) => const WayFinder()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +81,15 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
                       checkOut();
                     },
                     child: Text("Check Out"),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      wayFinder();
+                    },
+                    child: Text("Wayfinder"),
                   ),
                 ]))
           ],

@@ -18,13 +18,13 @@ class WayFinderScreen extends StatefulWidget {
 class WayFinderScreenState extends State<WayFinderScreen> {
   UnityWidgetController? _unityWidgetController;
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      changeToWayFinderScene();
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     changeToWayFinderScene();
+  //   });
+  // }
 
   void onUnityCreated(controller) async {
     _unityWidgetController = controller;
@@ -34,6 +34,8 @@ class WayFinderScreenState extends State<WayFinderScreen> {
     if (await permission.isDenied) {
       await permission.request();
     }
+
+    changeToWayFinderScene();
   }
 
   void onUnitySceneLoaded(SceneLoaded? sceneInfo) {
@@ -41,14 +43,6 @@ class WayFinderScreenState extends State<WayFinderScreen> {
       log('Received scene loaded from unity: ${sceneInfo.name}');
       log('Received scene loaded from unity buildIndex: ${sceneInfo.buildIndex}');
     }
-  }
-
-  void onUnityMessage(message) async {
-    log("Received message from Unity: ${message.toString()}");
-
-    Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
-        CupertinoPageRoute(builder: (context) => const HomeScreenAfter()));
   }
 
   void changeToWayFinderScene() {
@@ -77,7 +71,6 @@ class WayFinderScreenState extends State<WayFinderScreen> {
                 child: UnityWidget(
                   onUnityCreated: onUnityCreated,
                   onUnitySceneLoaded: onUnitySceneLoaded,
-                  onUnityMessage: onUnityMessage,
                   fullscreen: false,
                 ),
               ),

@@ -18,15 +18,8 @@ class CheckInScreen extends StatefulWidget {
 }
 
 class CheckInScreenState extends State<CheckInScreen> {
+  // ignore: unused_field
   UnityWidgetController? _unityWidgetController;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      changeToCheckInScene();
-    });
-  }
 
   void onUnityCreated(controller) async {
     _unityWidgetController = controller;
@@ -57,11 +50,6 @@ class CheckInScreenState extends State<CheckInScreen> {
     Navigator.popUntil(context, (route) => route.isFirst);
     Navigator.pushReplacement(context,
         CupertinoPageRoute(builder: (context) => const HomeScreenAfter()));
-  }
-
-  void changeToCheckInScene() {
-    _unityWidgetController?.postMessage(
-        'AR Session', 'LoadSceneSingle', 'CheckInCameraScene');
   }
 
   @override
