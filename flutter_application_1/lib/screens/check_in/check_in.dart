@@ -47,7 +47,8 @@ class CheckInScreenState extends State<CheckInScreen> {
       "Location": message.toString(),
       "Checked In": true,
     });
-    Navigator.popUntil(context, (route) => route.isFirst);
+    _unityWidgetController!.unload()?.then(
+        (value) => Navigator.popUntil(context, (route) => route.isFirst));
     Navigator.pushReplacement(context,
         CupertinoPageRoute(builder: (context) => const HomeScreenAfter()));
   }
