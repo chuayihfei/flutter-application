@@ -2,29 +2,27 @@
 
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home_screens/home_screen_after.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class CheckInScreen extends StatefulWidget {
-  const CheckInScreen({Key? key}) : super(key: key);
+class WayFinderScreen extends StatefulWidget {
+  const WayFinderScreen({Key? key}) : super(key: key);
 
   @override
-  State<CheckInScreen> createState() => CheckInScreenState();
+  State<WayFinderScreen> createState() => WayFinderScreenState();
 }
 
-class CheckInScreenState extends State<CheckInScreen> {
+class WayFinderScreenState extends State<WayFinderScreen> {
   UnityWidgetController? _unityWidgetController;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      changeToCheckInScene();
+      changeToWayFinderScene();
     });
   }
 
@@ -47,21 +45,17 @@ class CheckInScreenState extends State<CheckInScreen> {
 
   void onUnityMessage(message) async {
     log("Received message from Unity: ${message.toString()}");
-    User? user = FirebaseAuth.instance.currentUser;
-    DatabaseReference ref =
-        FirebaseDatabase.instance.ref("users/${user?.uid.toString()}");
-    await ref.update({
-      "Location": message.toString(),
-      "Checked In": true,
-    });
+
     Navigator.popUntil(context, (route) => route.isFirst);
     Navigator.pushReplacement(context,
         CupertinoPageRoute(builder: (context) => const HomeScreenAfter()));
   }
 
-  void changeToCheckInScene() {
+  void changeToWayFinderScene() {
+    log("Changed Unity Scene to Way Finder");
+
     _unityWidgetController?.postMessage(
-        'AR Session', 'LoadSceneSingle', 'CheckInCameraScene');
+        'AR Session', 'LoadSceneSingle', 'SerangoonMRT');
   }
 
   @override
@@ -69,7 +63,7 @@ class CheckInScreenState extends State<CheckInScreen> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text("Check In"),
+          title: const Text("Way Finder"),
         ),
         body: SafeArea(
             bottom: false,
@@ -79,7 +73,7 @@ class CheckInScreenState extends State<CheckInScreen> {
                 return true;
               },
               child: Container(
-                color: Colors.yellow,
+                color: Colors.green,
                 child: UnityWidget(
                   onUnityCreated: onUnityCreated,
                   onUnitySceneLoaded: onUnitySceneLoaded,
