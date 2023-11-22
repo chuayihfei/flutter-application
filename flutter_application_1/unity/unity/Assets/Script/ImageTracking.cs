@@ -9,6 +9,7 @@ using FlutterUnityIntegration;
 public class ImageTracking : MonoBehaviour
 {
     private ARTrackedImageManager m_tImageManager;
+    private ARSession m_Session;
     public string m_CheckedInPage;
 
     private UnityMessageManager Manager
@@ -51,5 +52,14 @@ public class ImageTracking : MonoBehaviour
     private void sendName(ARTrackedImage trackedImage)
     {
         Manager.SendMessageToFlutter(trackedImage.referenceImage.name);
+    }
+
+    public void ResetScene()
+    {
+        var xrManagerSettings = UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager;
+        xrManagerSettings.DeinitializeLoader();
+        Debug.Log("Resetting Scene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+        xrManagerSettings.InitializeLoaderSync();
     }
 }
