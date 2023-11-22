@@ -4,7 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/home_screens/home_screen_after.dart';
+import 'package:flutter_application_1/screens/home_screens/home_screen_before.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -64,6 +64,11 @@ class WayFinderScreenState extends State<WayFinderScreen> {
             child: WillPopScope(
               onWillPop: () async {
                 // Pop the category page if Android back button is pressed.
+                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.pushReplacement(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => const HomeScreenBefore()));
                 return true;
               },
               child: Container(

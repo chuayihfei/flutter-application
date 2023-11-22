@@ -33,11 +33,11 @@ public class LineNavigation : MonoBehaviour
         calculatedPathAndOffset = new Vector3[path.corners.Length];
 
         //get offset between cam and first point on floor
-        float offset = Mathf.Abs(transform.position.y - path.corners[0].y);
+        //float offset = Mathf.Abs(transform.position.y - path.corners[0].y);
 
         for (int i = 0; i < path.corners.Length; i++)
         {
-            calculatedPathAndOffset[i] = new Vector3(path.corners[i].x, path.corners[i].y + offset,
+            calculatedPathAndOffset[i] = new Vector3(path.corners[i].x, path.corners[i].y,
                 path.corners[i].z);
         }
 

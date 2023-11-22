@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/check_in/check_in.dart';
 import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
 import 'package:flutter_application_1/screens/home_screens/home_screen_before.dart';
+import 'package:flutter_application_1/screens/way_finder/way_finder.dart';
 
 class HomeScreenAfter extends StatefulWidget {
   const HomeScreenAfter({Key? key}) : super(key: key);
@@ -49,9 +50,9 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
 
   void wayFinder() async {
     log("Way Finder Button Pressed!");
-    // Navigator.popUntil(context, (route) => route.isFirst);
-    // Navigator.pushReplacement(
-    //     context, CupertinoPageRoute(builder: (context) => const WayFinder()));
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushReplacement(context,
+        CupertinoPageRoute(builder: (context) => const WayFinderScreen()));
   }
 
   @override
