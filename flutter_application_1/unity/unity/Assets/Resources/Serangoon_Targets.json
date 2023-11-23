@@ -1,0 +1,251 @@
+ {
+	"listTargets": [
+		{
+			"Name": "Origin",
+			"Position": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Lift Concourse",
+			"Position": {
+				"x": -5.4,
+				"y": -0.5,
+				"z": -2.0
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Stairs 1 Concourse",
+			"Position": {
+				"x": -60.8,
+				"y": -0.5,
+				"z": 5.45
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 180.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Stairs 1 Platform",
+			"Position": {
+				"x": -55.3,
+				"y": -4,
+				"z": -2
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Esc 1 Concourse",
+			"Position": {
+				"x": -18,
+				"y": -0.5,
+				"z": -2.4
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Esc 1 Platform",
+			"Position": {
+				"x": -35,
+				"y": -4,
+				"z": -2.4
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Esc 2 Concourse",
+			"Position": {
+				"x": 3.5,
+				"y": -0.5,
+				"z": -1.8
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Esc 2 Platform",
+			"Position": {
+				"x": 18,
+				"y": -4,
+				"z": -1.8
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Stairs 2 Concourse",
+			"Position": {
+				"x": 34.15,
+				"y": -0.5,
+				"z": -7.23
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Stairs 2 Platform",
+			"Position": {
+				"x": 26,
+				"y": -4,
+				"z": -2.5
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Nex Exit Btm Esc",
+			"Position": {
+				"x": 22.3,
+				"y": -0.5,
+				"z": 42
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Nex Exit Top Esc",
+			"Position": {
+				"x": 24.4,
+				"y": 5.8,
+				"z": 55
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Nex Entrance",
+			"Position": {
+				"x": 15.8,
+				"y": 5.8,
+				"z": 60.5
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Bus Stop 1 Btm Esc",
+			"Position": {
+				"x": 16.8,
+				"y": 5.8,
+				"z": 55.5
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -180.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Bus Stop 1 Top Esc",
+			"Position": {
+				"x": 14.7,
+				"y": 13.2,
+				"z": 40
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -180.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Bus Stop 1",
+			"Position": {
+				"x": -72.8,
+				"y": 13.2,
+				"z": 23
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": -90.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Bus Stop 2 Btm Esc",
+			"Position": {
+				"x": 83.4,
+				"y": -0.5,
+				"z": 34
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Bus Stop 2 Top Esc",
+			"Position": {
+				"x": 87.5,
+				"y": 13.2,
+				"z": 60
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		},
+		{
+			"Name": "Bus Stop 2",
+			"Position": {
+				"x": 100,
+				"y": 13.2,
+				"z": 88
+			},
+			"Rotation": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 0.0
+			}
+		}
+	]
+}

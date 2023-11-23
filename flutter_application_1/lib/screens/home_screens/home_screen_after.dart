@@ -10,6 +10,7 @@ import 'package:flutter_application_1/screens/check_in/check_in.dart';
 import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
 import 'package:flutter_application_1/screens/group_chat/chats_screen.dart';
 import 'package:flutter_application_1/screens/home_screens/home_screen_before.dart';
+import 'package:flutter_application_1/screens/way_finder/way_finder.dart';
 
 class HomeScreenAfter extends StatefulWidget {
   const HomeScreenAfter({Key? key}) : super(key: key);
@@ -52,6 +53,13 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
     log("After PushReplacement after pressed");
   }
 
+  void wayFinder() async {
+    log("Way Finder Button Pressed!");
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushReplacement(context,
+        CupertinoPageRoute(builder: (context) => const WayFinderScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +87,15 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
                       checkOut();
                     },
                     child: Text("Check Out"),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      wayFinder();
+                    },
+                    child: Text("Wayfinder"),
                   ),
                 ]))
           ],
