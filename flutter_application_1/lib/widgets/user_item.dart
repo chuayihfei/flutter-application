@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants.dart';
+import 'package:flutter_application_1/screens/group_chat/chat_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter_application_1/model/user.dart';
 
@@ -20,10 +21,9 @@ class UserItemState extends State<UserItem> {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-          // onTap: () => Navigator.of(context).push(
-          //   MaterialPageRoute(builder: (_) => ChatScreen(userId: widget.user.uid))
-          // ),
-          child: ListTile(
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => ChatScreen(userId: widget.user.uid))),
+      child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: Stack(
           alignment: Alignment.bottomRight,
