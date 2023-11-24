@@ -133,7 +133,7 @@
 		{
 			"Name": "Nex Exit Btm Esc",
 			"Position": {
-				"x": 22.3,
+				"x": 23,
 				"y": -0.5,
 				"z": 42
 			},
@@ -146,8 +146,8 @@
 		{
 			"Name": "Nex Exit Top Esc",
 			"Position": {
-				"x": 24.4,
-				"y": 5.8,
+				"x": 23,
+				"y": 5.3,
 				"z": 55
 			},
 			"Rotation": {
@@ -159,9 +159,9 @@
 		{
 			"Name": "Nex Entrance",
 			"Position": {
-				"x": 15.8,
-				"y": 5.8,
-				"z": 60.5
+				"x": 14.5,
+				"y": 5.5,
+				"z": 60
 			},
 			"Rotation": {
 				"x": 0.0,
@@ -172,9 +172,9 @@
 		{
 			"Name": "Bus Stop 1 Btm Esc",
 			"Position": {
-				"x": 16.8,
-				"y": 5.8,
-				"z": 55.5
+				"x": 15,
+				"y": 5.5,
+				"z": 54
 			},
 			"Rotation": {
 				"x": 0.0,
@@ -185,9 +185,9 @@
 		{
 			"Name": "Bus Stop 1 Top Esc",
 			"Position": {
-				"x": 14.7,
-				"y": 13.2,
-				"z": 40
+				"x": 15,
+				"y": 12,
+				"z": 35
 			},
 			"Rotation": {
 				"x": 0.0,
@@ -198,9 +198,9 @@
 		{
 			"Name": "Bus Stop 1",
 			"Position": {
-				"x": -72.8,
-				"y": 13.2,
-				"z": 23
+				"x": -70,
+				"y": 12,
+				"z": 12
 			},
 			"Rotation": {
 				"x": 0.0,
@@ -211,39 +211,39 @@
 		{
 			"Name": "Bus Stop 2 Btm Esc",
 			"Position": {
-				"x": 83.4,
+				"x": 15,
 				"y": -0.5,
-				"z": 34
+				"z": -33
 			},
 			"Rotation": {
 				"x": 0.0,
-				"y": 0.0,
+				"y": -90.0,
 				"z": 0.0
 			}
 		},
 		{
 			"Name": "Bus Stop 2 Top Esc",
 			"Position": {
-				"x": 87.5,
-				"y": 13.2,
-				"z": 60
+				"x": -18,
+				"y": 12,
+				"z": -33
 			},
 			"Rotation": {
 				"x": 0.0,
-				"y": 0.0,
+				"y": -90.0,
 				"z": 0.0
 			}
 		},
 		{
 			"Name": "Bus Stop 2",
 			"Position": {
-				"x": 100,
-				"y": 13.2,
-				"z": 88
+				"x": -47,
+				"y": 12,
+				"z": -28
 			},
 			"Rotation": {
 				"x": 0.0,
-				"y": 0.0,
+				"y": 90.0,
 				"z": 0.0
 			}
 		}
