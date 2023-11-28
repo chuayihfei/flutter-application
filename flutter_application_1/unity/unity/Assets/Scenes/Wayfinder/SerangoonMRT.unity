@@ -2849,7 +2849,7 @@ Transform:
   m_GameObject: {fileID: 453240456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -92.59, y: 10, z: 12.450001}
+  m_LocalPosition: {x: -92.59, y: 10, z: 8.82}
   m_LocalScale: {x: 22, y: 0.2, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3863,7 +3863,7 @@ GameObject:
   - component: {fileID: 583348367}
   - component: {fileID: 583348366}
   - component: {fileID: 583348369}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lineIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4045,7 +4045,7 @@ Transform:
   m_GameObject: {fileID: 625871347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -73.6, y: 5.5, z: 12.450001}
+  m_LocalPosition: {x: -73.6, y: 5.5, z: 8.82}
   m_LocalScale: {x: 60, y: 0.2, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7774,7 +7774,7 @@ GameObject:
   - component: {fileID: 1420971449}
   - component: {fileID: 1420971453}
   - component: {fileID: 1420971452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arrowIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11765,7 +11765,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7974
+    m_Bits: 7975
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1b2abdc2992186e43a9b0d917a59eb46, type: 2}
   m_TargetDisplay: 0
@@ -12418,7 +12418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 722198929174433372}
   m_Layer: 0
-  m_Name: Serangoon_ConcourseHoleTest1
+  m_Name: Serangoon_Concourse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12822,7 +12822,7 @@ GameObject:
   - component: {fileID: 403116629603023525}
   - component: {fileID: 2485106533472046703}
   - component: {fileID: 4142224556032339899}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: navigationarrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12919,7 +12919,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4343197188936876062
 CapsuleCollider:
   m_ObjectHideFlags: 0
