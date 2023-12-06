@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home_screens/home_screen_after.dart';
 import 'package:flutter_application_1/screens/home_screens/home_screen_before.dart';
 import 'package:flutter_application_1/screens/email_auth/signup_screen.dart';
+import 'package:flutter_application_1/services/notification_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -31,6 +32,7 @@ class LoginScreenState extends State<LoginScreen> {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
+        await NotificationService().getToken();
         if (userCredential.user != null) {
           final ref = FirebaseDatabase.instance.ref();
           final snapshot = await ref
@@ -39,13 +41,13 @@ class LoginScreenState extends State<LoginScreen> {
               .get();
           if (snapshot.exists && snapshot.value == true) {
             Navigator.popUntil(context, (route) => route.isFirst);
-            Navigator.pushReplacement(
+            Navigator.push(
                 context,
                 CupertinoPageRoute(
                     builder: (context) => const HomeScreenAfter()));
           } else {
             Navigator.popUntil(context, (route) => route.isFirst);
-            Navigator.pushReplacement(
+            Navigator.push(
                 context,
                 CupertinoPageRoute(
                     builder: (context) => const HomeScreenBefore()));

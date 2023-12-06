@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/user.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
+import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
 import 'package:flutter_application_1/screens/group_chat/search_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/services/notification_service.dart';
@@ -53,6 +56,15 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
     super.dispose();
   }
 
+  void logOut() async {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        '/loginScreen', (Route<dynamic> route) => false);
+    Future.delayed(const Duration(seconds: 2), () async {
+      await FirebaseAuth.instance.signOut();
+      FirebaseMessaging.instance.deleteToken();
+    });
+  }
+
   final userData = [
     UserModel(
       uid: '1',
@@ -99,7 +111,7 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
               icon: const Icon(Icons.search, color: Colors.black),
             ),
             IconButton(
-              onPressed: () => FirebaseAuth.instance.signOut(),
+              onPressed: () => logOut(),
               icon: const Icon(Icons.logout, color: Colors.black),
             ),
           ],

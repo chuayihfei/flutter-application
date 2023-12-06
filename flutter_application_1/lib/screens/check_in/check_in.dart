@@ -39,8 +39,7 @@ class CheckInScreenState extends State<CheckInScreen> {
   }
 
   void onUnityMessage(message) async {
-    _unityWidgetController?.postMessage(
-        'AR Session Origin', 'ResetScene', '');
+    _unityWidgetController?.postMessage('AR Session Origin', 'ResetScene', '');
     log("Received message from Unity: ${message.toString()}");
     User? user = FirebaseAuth.instance.currentUser;
     DatabaseReference ref =
@@ -51,7 +50,7 @@ class CheckInScreenState extends State<CheckInScreen> {
     });
 
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const HomeScreenAfter()));
   }
 

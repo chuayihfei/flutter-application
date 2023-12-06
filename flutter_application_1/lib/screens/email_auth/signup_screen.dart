@@ -43,7 +43,7 @@ class SignUpScreenState extends State<SignUpScreen> {
             name: nameController.text,
           );
           await NotificationService().requestPermission();
-          await NotificationService().getToken();
+          //await NotificationService().getToken();
 
           log("User Created!");
           Navigator.pop(context);

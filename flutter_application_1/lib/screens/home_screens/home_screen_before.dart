@@ -22,28 +22,28 @@ class HomeScreenBeforeState extends State<HomeScreenBefore> {
     await FirebaseAuth.instance.signOut();
 
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(
+    Navigator.push(
         context, CupertinoPageRoute(builder: (context) => const LoginScreen()));
   }
 
   void checkIn() async {
     log("Check In Button Pressed!");
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const CheckInScreen()));
   }
 
   void groupChat() async {
     log("Group Chat Button Pressed!");
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(
+    Navigator.push(
         context, CupertinoPageRoute(builder: (context) => const ChatsScreen()));
   }
 
   void wayFinder() async {
     log("Way Finder Button Pressed!");
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const WayFinderScreen()));
   }
 

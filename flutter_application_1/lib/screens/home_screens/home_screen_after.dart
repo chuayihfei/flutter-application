@@ -38,7 +38,7 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
       "Checked In": false,
     });
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const HomeScreenBefore()));
   }
 
@@ -47,7 +47,7 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
     Navigator.popUntil(context, (route) => route.isFirst);
 
     log("After Pop after pressed");
-    Navigator.pushReplacement(
+    Navigator.push(
         context, CupertinoPageRoute(builder: (context) => const ChatsScreen()));
 
     log("After PushReplacement after pressed");
@@ -56,7 +56,7 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
   void wayFinder() async {
     log("Way Finder Button Pressed!");
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const WayFinderScreen()));
   }
 

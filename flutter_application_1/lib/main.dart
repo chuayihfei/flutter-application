@@ -6,6 +6,7 @@ import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
 import 'package:flutter_application_1/screens/home_screens/home_screen_before.dart';
 import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
+import 'package:flutter_application_1/services/LifeCycleWatcher.dart';
 import 'package:provider/provider.dart';
 
 import 'services/notification_service.dart';
@@ -42,26 +43,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (_) => FirebaseProvider(),
         child: MaterialApp(
-          navigatorKey: navigatorKey,
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                    minimumSize: const Size.fromHeight(52),
-                    backgroundColor: mainColor),
-              ),
-              appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                titleTextStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
+            navigatorKey: navigatorKey,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
+                      minimumSize: const Size.fromHeight(52),
+                      backgroundColor: mainColor),
                 ),
-              )),
-          home: const MainPage(),
-        ),
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  titleTextStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
+            home: const MainPage(),
+            initialRoute: '/',
+            routes: {
+              '/loginScreen': (context) => const LoginScreen(),
+            }),
       );
 }
 
