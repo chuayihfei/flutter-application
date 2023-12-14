@@ -89,4 +89,14 @@ class FirebaseFirestoreService {
 
     return snapshot.docs.map((doc) => UserModel.fromJson(doc.data())).toList();
   }
+
+  static Future<void> checkIn(String location) async => await firestore
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .update({"location": location, "checkedIn": true});
+
+  static Future<void> checkOut() async => await firestore
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .update({"location": "", "checkedIn": false});
 }

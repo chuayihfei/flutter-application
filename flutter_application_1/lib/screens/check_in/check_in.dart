@@ -7,6 +7,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home_screens/home_screen_after.dart';
+import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -41,13 +42,14 @@ class CheckInScreenState extends State<CheckInScreen> {
   void onUnityMessage(message) async {
     _unityWidgetController?.postMessage('AR Session Origin', 'ResetScene', '');
     log("Received message from Unity: ${message.toString()}");
-    User? user = FirebaseAuth.instance.currentUser;
-    DatabaseReference ref =
-        FirebaseDatabase.instance.ref("users/${user?.uid.toString()}");
-    await ref.update({
-      "Location": message.toString(),
-      "Checked In": true,
-    });
+    //User? user = FirebaseAuth.instance.currentUser;
+    // DatabaseReference ref =
+    //     FirebaseDatabase.instance.ref("users/${user?.uid.toString()}");
+    // await ref.update({
+    //   "Location": message.toString(),
+    //   "Checked In": true,
+    // });
+    FirebaseFirestoreService.checkIn(message.toString());
 
     Navigator.popUntil(context, (route) => route.isFirst);
     Navigator.push(context,

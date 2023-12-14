@@ -7,28 +7,32 @@ class UserModel {
   // final String image;
   final DateTime lastActive;
   final bool isOnline;
+  final String location;
+  final bool checkedIn;
 
-  const UserModel({
-    required this.name,
-    // required this.image,
-    required this.lastActive,
-    required this.uid,
-    required this.email,
-    this.isOnline = false,
-  });
+  const UserModel(
+      {required this.name,
+      // required this.image,
+      required this.lastActive,
+      required this.uid,
+      required this.email,
+      this.isOnline = false,
+      this.location = "",
+      this.checkedIn = false});
 
   factory UserModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
       SnapshotOptions? options) {
     final data = snapshot.data();
     return UserModel(
-      uid: data?['uid'],
-      name: data?['name'],
-      //  image: json['image'],
-      email: data?['email'],
-      isOnline: data?['isOnline'],
-      lastActive: DateTime.parse(data?['lastActive']),
-    );
+        uid: data?['uid'],
+        name: data?['name'],
+        //  image: json['image'],
+        email: data?['email'],
+        isOnline: data?['isOnline'],
+        lastActive: data?['lastActive'].toDate(),
+        location: data?['location'],
+        checkedIn: data?['checkedIn']);
   }
 
   Map<String, dynamic> toFirestore() {
@@ -38,6 +42,8 @@ class UserModel {
       if (email != null) "email": email,
       if (isOnline != null) "isOnline": isOnline,
       if (lastActive != null) "lastActive": lastActive,
+      if (location != null) "location": location,
+      if (checkedIn != null) "checkedIn": checkedIn,
     };
   }
 
@@ -48,6 +54,8 @@ class UserModel {
         email: json['email'],
         isOnline: json['isOnline'],
         lastActive: json['lastActive'].toDate(),
+        location: json['location'],
+        checkedIn: json['checkedIn'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,5 +65,7 @@ class UserModel {
         'email': email,
         'isOnline': isOnline,
         'lastActive': lastActive,
+        'location': location,
+        'checkedIn': checkedIn
       };
 }
