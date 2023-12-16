@@ -31,7 +31,7 @@ class ChatScreenState extends State<ChatScreen> {
             child: Column(
               children: [
                 ChatMessages(receiverId: widget.userId),
-                ChatTextField(receiverId: widget.userId)
+                ChatTextField(chatId: widget.userId)
               ],
             )));
   }

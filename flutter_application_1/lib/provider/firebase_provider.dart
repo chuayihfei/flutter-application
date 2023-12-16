@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/model/chat.dart';
 import 'package:flutter_application_1/model/message.dart';
 import 'package:flutter_application_1/model/user.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
@@ -12,6 +13,8 @@ class FirebaseProvider extends ChangeNotifier {
   UserModel? user;
   List<Message> messages = [];
   List<UserModel> search = [];
+  List<ChatModel> chats = [];
+  List<String> chatsId = [];
 
   Future<List<UserModel>> getAllUsers() async {
     FirebaseFirestore.instance
@@ -36,6 +39,18 @@ class FirebaseProvider extends ChangeNotifier {
       notifyListeners();
     });
     return user;
+  }
+
+  List<ChatModel> getAllChats() {
+    FirebaseFirestore.instance
+        .collection('chats')
+        .where('usersId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots(includeMetadataChanges: true)
+        .listen((chats) {
+      this.chats =
+          chats.docs.map((doc) => ChatModel.fromJson(doc.data())).toList();
+    });
+    return chats;
   }
 
   List<Message> getMessages(String receiverId) {

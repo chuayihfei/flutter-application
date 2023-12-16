@@ -1,19 +1,19 @@
 class Message {
   final String senderId;
-  final String receiverId;
+  final String chatId;
   final String content;
   final DateTime sentTime;
   final MessageType messageType;
 
   const Message(
       {required this.senderId,
-      required this.receiverId,
+      required this.chatId,
       required this.sentTime,
       required this.content,
       required this.messageType});
 
   factory Message.fromJson(Map<String, dynamic> json) => Message(
-        receiverId: json['receiverId'],
+        chatId: json['receiverId'],
         senderId: json['senderId'],
         sentTime: json['sentTime'].toDate(),
         content: json['content'],
@@ -21,7 +21,7 @@ class Message {
       );
 
   Map<String, dynamic> toJson() => {
-        'receiverId': receiverId,
+        'receiverId': chatId,
         'senderId': senderId,
         'sentTime': sentTime,
         'content': content,

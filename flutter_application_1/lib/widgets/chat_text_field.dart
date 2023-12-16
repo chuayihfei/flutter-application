@@ -9,9 +9,9 @@ import 'package:flutter_application_1/services/notification_service.dart';
 import 'package:flutter_application_1/widgets/custom_text_form_field.dart';
 
 class ChatTextField extends StatefulWidget {
-  const ChatTextField({super.key, required this.receiverId});
+  const ChatTextField({super.key, required this.chatId});
 
-  final String receiverId;
+  final String chatId;
 
   @override
   State<ChatTextField> createState() => ChatTextFieldState();
@@ -25,7 +25,7 @@ class ChatTextFieldState extends State<ChatTextField> {
 
   @override
   void initState() {
-    notificationService.getReceiverToken(widget.receiverId);
+    notificationService.getReceiverToken(widget.chatId);
     super.initState();
   }
 
@@ -68,7 +68,7 @@ class ChatTextFieldState extends State<ChatTextField> {
   Future<void> sendText(BuildContext context) async {
     if (controller.text.isNotEmpty) {
       await FirebaseFirestoreService.addTextMessage(
-          content: controller.text, receiverId: widget.receiverId);
+          content: controller.text, chatId: widget.chatId);
       await notificationService.sendNotification(
           body: controller.text,
           senderId: FirebaseAuth.instance.currentUser!.uid);
@@ -84,7 +84,7 @@ class ChatTextFieldState extends State<ChatTextField> {
     setState(() => file = pickedImage);
     if (file != null) {
       await FirebaseFirestoreService.addImageMesage(
-        receiverId: widget.receiverId,
+        chatId: widget.chatId,
         file: file!,
       );
       await notificationService.sendNotification(
