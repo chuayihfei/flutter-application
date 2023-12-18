@@ -15,6 +15,7 @@ class FirebaseProvider extends ChangeNotifier {
   List<UserModel> search = [];
   List<ChatModel> chats = [];
   List<String> chatsId = [];
+  ChatModel? chat;
 
   Future<List<UserModel>> getAllUsers() async {
     FirebaseFirestore.instance
@@ -53,12 +54,33 @@ class FirebaseProvider extends ChangeNotifier {
     return chats;
   }
 
-  List<Message> getMessages(String receiverId) {
+  ChatModel? getChatById(String chatId) {
     FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('chat')
-        .doc(receiverId)
+        .collection('chats')
+        .doc(chatId)
+        .snapshots(includeMetadataChanges: true)
+        .listen((chat) {
+      this.chat = ChatModel.fromJson(chat.data()!);
+      notifyListeners();
+    });
+    return chat;
+  }
+
+  List<ChatModel> getChatsWithUids(List<String> uids) {
+    FirebaseFirestore.instance
+        .collection('chats')
+        .where('usersId', isEqualTo: uids)
+        .snapshots(includeMetadataChanges: true)
+        .listen((chat) {
+      chats = chat.docs.map((doc) => ChatModel.fromJson(doc.data())).toList();
+    });
+    return chats;
+  }
+
+  List<Message> getMessages(String chatId) {
+    FirebaseFirestore.instance
+        .collection('chats')
+        .doc(chatId)
         .collection('messages')
         .orderBy('sentTime', descending: false)
         .snapshots(includeMetadataChanges: true)

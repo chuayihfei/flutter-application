@@ -20,7 +20,7 @@ class ChatItemState extends State<ChatItem> {
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => ChatScreen(userId: widget.chat.chatId))),
+          builder: (_) => ChatScreen(chatId: widget.chat.chatId))),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: const Stack(

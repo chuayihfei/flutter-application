@@ -5,9 +5,9 @@ import 'package:flutter_application_1/widgets/chat_text_field.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key, required this.userId});
+  const ChatScreen({super.key, required this.chatId});
 
-  final String userId;
+  final String chatId;
 
   @override
   State<ChatScreen> createState() => ChatScreenState();
@@ -17,8 +17,7 @@ class ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     Provider.of<FirebaseProvider>(context, listen: false)
-      ..getUserById(widget.userId)
-      ..getMessages(widget.userId);
+        .getMessages(widget.chatId);
     super.initState();
   }
 
@@ -30,8 +29,8 @@ class ChatScreenState extends State<ChatScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                ChatMessages(receiverId: widget.userId),
-                ChatTextField(chatId: widget.userId)
+                ChatMessages(chatId: widget.chatId),
+                ChatTextField(chatId: widget.chatId)
               ],
             )));
   }

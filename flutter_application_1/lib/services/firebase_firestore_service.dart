@@ -27,22 +27,24 @@ class FirebaseFirestoreService {
     await firestore.collection('users').doc(uid).set(user.toJson());
   }
 
-  static Future<void> createPrivateChat(
+  static Future<String> createPrivateChat(
       {required String name, required List<String> usersId}) async {
     final chatID = uuid.v1();
     final chat = ChatModel(
         chatId: chatID, chatName: name, isGroupChat: false, usersId: usersId);
 
     await firestore.collection('chats').doc(chatID).set(chat.toJson());
+    return chatID;
   }
 
-  static Future<void> createGroupChat(
+  static Future<String> createGroupChat(
       {required String name, required List<String> usersId}) async {
     final chatID = uuid.v1();
     final chat = ChatModel(
         chatId: chatID, chatName: name, isGroupChat: true, usersId: usersId);
 
     await firestore.collection('chats').doc(chatID).set(chat.toJson());
+    return chatID;
   }
 
   static Future<void> addTextMessage({

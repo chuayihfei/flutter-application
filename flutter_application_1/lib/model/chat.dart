@@ -37,7 +37,7 @@ class ChatModel {
         chatId: json['chatId'],
         chatName: json['chatName'],
         isGroupChat: json['isGroupChat'],
-        usersId: json['usersId'],
+        usersId: List<String>.from(json['usersId']),
       );
 
   Map<String, dynamic> toJson() => {

@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/model/chat.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 
@@ -103,6 +104,24 @@ class NotificationService {
         .get();
 
     receiverToken = await getToken.data()!['token'];
+  }
+
+  Future<void> getChatReceiversToken(String? chatId) async {
+    ChatModel? chat;
+    var stream = FirebaseFirestore.instance
+        .collection('chats')
+        .doc(chatId)
+        .snapshots(includeMetadataChanges: true);
+
+    await for (var value in stream) {
+      chat = ChatModel.fromJson(value.data()!);
+    }
+    List<String> uids = chat!.usersId;
+    for (var i = 0; i < uids.length; i++) {
+      if (uids[i] != FirebaseAuth.instance.currentUser!.uid) {
+        getReceiverToken(uids[i]);
+      }
+    }
   }
 
   void firebaseNotification(context) {

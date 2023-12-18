@@ -1,8 +1,10 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants.dart';
+import 'package:flutter_application_1/model/chat.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/services/media_service.dart';
 import 'package:flutter_application_1/services/notification_service.dart';
@@ -25,7 +27,7 @@ class ChatTextFieldState extends State<ChatTextField> {
 
   @override
   void initState() {
-    notificationService.getReceiverToken(widget.chatId);
+    notificationService.getChatReceiversToken(widget.chatId);
     super.initState();
   }
 

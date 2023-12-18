@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/message.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
@@ -6,8 +7,8 @@ import 'package:flutter_application_1/widgets/message_bubble.dart';
 import 'package:provider/provider.dart';
 
 class ChatMessages extends StatelessWidget {
-  ChatMessages({super.key, required this.receiverId});
-  final String receiverId;
+  ChatMessages({super.key, required this.chatId});
+  final String chatId;
 
   @override
   Widget build(BuildContext context) => Consumer<FirebaseProvider>(
@@ -25,7 +26,8 @@ class ChatMessages extends StatelessWidget {
               itemBuilder: (context, index) {
                 final isTextMessage =
                     value.messages[index].messageType == MessageType.text;
-                final isMe = receiverId != value.messages[index].senderId;
+                final isMe = FirebaseAuth.instance.currentUser!.uid ==
+                    value.messages[index].senderId;
 
                 return isTextMessage
                     ? MessageBubble(
