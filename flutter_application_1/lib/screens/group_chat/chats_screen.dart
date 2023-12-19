@@ -91,12 +91,15 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
         ),
         body: Consumer<FirebaseProvider>(builder: (context, value, child) {
           return ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: value.chats.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) =>
-                  ChatItem(chat: value.chats[index]));
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: value.chats.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) => value.chats[index].usersId
+                    .contains(FirebaseAuth.instance.currentUser?.uid)
+                ? ChatItem(chat: value.chats[index])
+                : const SizedBox(),
+          );
         }),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,

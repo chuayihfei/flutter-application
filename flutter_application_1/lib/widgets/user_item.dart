@@ -26,16 +26,21 @@ class UserItemState extends State<UserItem> {
 
   Future<List<ChatModel>> getChatsWithUids(List<String> uids) async {
     List<ChatModel> chats = [];
-    var stream = FirebaseFirestore.instance
-        .collection('chats')
-        .where('isGroupChat', isEqualTo: false)
-        .where('usersId', arrayContainsAny: uids)
-        .snapshots(includeMetadataChanges: true);
+    var stream =
+        FirebaseFirestore.instance.collection('chats').get().asStream();
 
     await for (var value in stream) {
       chats = value.docs.map((doc) => ChatModel.fromJson(doc.data())).toList();
       setState(() {});
-      return chats;
+    }
+    for (int i = 0; i < chats.length; i++) {
+      if (!chats[i].isGroupChat) {
+        if (chats[i].usersId.length == uids.length &&
+            chats[i].usersId.every(uids.contains)) {
+          continue;
+        }
+      }
+      chats.removeAt(i);
     }
     return chats;
   }
@@ -46,12 +51,13 @@ class UserItemState extends State<UserItem> {
       widget.user.uid
     ];
     List<ChatModel> chats = await getChatsWithUids(uids);
-    //await Future.delayed(Duration.zero);
     String chatID = '';
 
     if (chats.isEmpty) {
+      String chatName =
+          "${widget.user.name} ${FirebaseAuth.instance.currentUser!.displayName}";
       chatID = await FirebaseFirestoreService.createPrivateChat(
-          name: widget.user.name, usersId: uids);
+          name: chatName, usersId: uids);
     } else {
       chatID = chats.first.chatId;
     }

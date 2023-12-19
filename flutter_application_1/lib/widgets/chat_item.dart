@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/chat.dart';
+import 'package:flutter_application_1/model/user.dart';
 import 'package:flutter_application_1/screens/group_chat/chat_screen.dart';
 
 class ChatItem extends StatefulWidget {
@@ -15,6 +18,16 @@ class ChatItemState extends State<ChatItem> {
   @override
   void initState() {
     super.initState();
+  }
+
+  String getChatName() {
+    if (widget.chat.isGroupChat) {
+      return widget.chat.chatName;
+    }
+    String chatName = widget.chat.chatName;
+    String userName = FirebaseAuth.instance.currentUser!.displayName.toString();
+    chatName = chatName.replaceAll(userName, "").trim();
+    return chatName;
   }
 
   @override
@@ -41,7 +54,7 @@ class ChatItemState extends State<ChatItem> {
           ],
         ),
         title: Text(
-          widget.chat.chatName,
+          getChatName(),
           style: const TextStyle(
             color: Colors.black,
             fontSize: 18,

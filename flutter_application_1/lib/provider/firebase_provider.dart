@@ -45,11 +45,11 @@ class FirebaseProvider extends ChangeNotifier {
   List<ChatModel> getAllChats() {
     FirebaseFirestore.instance
         .collection('chats')
-        .where('usersId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots(includeMetadataChanges: true)
         .listen((chats) {
       this.chats =
           chats.docs.map((doc) => ChatModel.fromJson(doc.data())).toList();
+      notifyListeners();
     });
     return chats;
   }
