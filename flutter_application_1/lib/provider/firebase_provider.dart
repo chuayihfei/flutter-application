@@ -16,6 +16,7 @@ class FirebaseProvider extends ChangeNotifier {
   List<ChatModel> chats = [];
   List<String> chatsId = [];
   ChatModel? chat;
+  List<bool> addedToGroup = [];
 
   Future<List<UserModel>> getAllUsers() async {
     FirebaseFirestore.instance
@@ -25,6 +26,7 @@ class FirebaseProvider extends ChangeNotifier {
         .listen((users) {
       this.users =
           users.docs.map((doc) => UserModel.fromJson(doc.data())).toList();
+      addedToGroup = List.filled(this.users.length, false);
       notifyListeners();
     });
     return users;
@@ -103,5 +105,10 @@ class FirebaseProvider extends ChangeNotifier {
   Future<void> searchUser(String name) async {
     search = await FirebaseFirestoreService.searchUser(name);
     notifyListeners();
+  }
+
+  List<bool> getifAddedToGroup() {
+    addedToGroup = List.filled(users.length, false);
+    return addedToGroup;
   }
 }

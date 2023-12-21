@@ -53,6 +53,7 @@ class FirebaseFirestoreService {
   }) async {
     final message = Message(
         senderId: FirebaseAuth.instance.currentUser!.uid,
+        senderName: FirebaseAuth.instance.currentUser!.displayName.toString(),
         chatId: chatId,
         sentTime: DateTime.now(),
         content: content,
@@ -69,6 +70,7 @@ class FirebaseFirestoreService {
 
     final message = Message(
         senderId: FirebaseAuth.instance.currentUser!.uid,
+        senderName: FirebaseAuth.instance.currentUser!.displayName.toString(),
         chatId: chatId,
         sentTime: DateTime.now(),
         content: image,

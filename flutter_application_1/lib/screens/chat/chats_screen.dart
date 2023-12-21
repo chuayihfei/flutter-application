@@ -1,27 +1,35 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/model/user.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
-import 'package:flutter_application_1/screens/group_chat/search_screen.dart';
+import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
+import 'package:flutter_application_1/screens/chat/new_chat_screen.dart';
+import 'package:flutter_application_1/screens/chat/search_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
-import 'package:flutter_application_1/widgets/user_item.dart';
+import 'package:flutter_application_1/services/notification_service.dart';
+import 'package:flutter_application_1/widgets/chat_item.dart';
+import 'package:flutter_application_1/widgets/private_user_item.dart';
 import 'package:provider/provider.dart';
 
-class NewChatScreen extends StatefulWidget {
-  const NewChatScreen({super.key});
+class ChatsScreen extends StatefulWidget {
+  const ChatsScreen({super.key});
 
   @override
-  State<NewChatScreen> createState() => NewChatScreenState();
+  State<ChatsScreen> createState() => ChatsScreenState();
 }
 
-class NewChatScreenState extends State<NewChatScreen>
-    with WidgetsBindingObserver {
+class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
+  final notificationService = NotificationService();
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
-    Provider.of<FirebaseProvider>(context, listen: false).getAllUsers();
+    Provider.of<FirebaseProvider>(context, listen: false).getAllChats();
+    notificationService.firebaseNotification(context);
   }
 
   @override
@@ -59,10 +67,16 @@ class NewChatScreenState extends State<NewChatScreen>
     });
   }
 
+  void addNewChat() async {
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.push(context,
+        CupertinoPageRoute(builder: (context) => const NewChatScreen()));
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('New Chat'),
+          title: const Text('Chats'),
           actions: [
             IconButton(
               onPressed: () => Navigator.of(context).push(
@@ -78,14 +92,20 @@ class NewChatScreenState extends State<NewChatScreen>
         body: Consumer<FirebaseProvider>(builder: (context, value, child) {
           return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: value.users.length,
+            itemCount: value.chats.length,
             separatorBuilder: (context, index) => const SizedBox(height: 10),
             physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) =>
-                value.users[index].uid != FirebaseAuth.instance.currentUser?.uid
-                    ? UserItem(user: value.users[index])
-                    : const SizedBox(),
+            itemBuilder: (context, index) => value.chats[index].usersId
+                    .contains(FirebaseAuth.instance.currentUser?.uid)
+                ? ChatItem(chat: value.chats[index])
+                : const SizedBox(),
           );
         }),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          onPressed: () => addNewChat(),
+          child: const Icon(Icons.add),
+        ),
       );
 }

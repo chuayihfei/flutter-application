@@ -3,46 +3,47 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants.dart';
 import 'package:flutter_application_1/model/chat.dart';
-import 'package:flutter_application_1/screens/group_chat/chat_screen.dart';
+import 'package:flutter_application_1/screens/chat/chat_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter_application_1/model/user.dart';
 
-class UserItem extends StatefulWidget {
-  const UserItem({super.key, required this.user});
+class PrivateUserItem extends StatefulWidget {
+  const PrivateUserItem({super.key, required this.user});
 
   final UserModel user;
 
   @override
-  State<UserItem> createState() => UserItemState();
+  State<PrivateUserItem> createState() => PrivateUserItemState();
 }
 
-class UserItemState extends State<UserItem> {
+class PrivateUserItemState extends State<PrivateUserItem> {
   @override
   void initState() {
     super.initState();
   }
 
   Future<List<ChatModel>> getChatsWithUids(List<String> uids) async {
-    List<ChatModel> chats = [];
+    List<ChatModel> toReturnChats = [];
+    List<ChatModel> toStore = [];
     var stream =
         FirebaseFirestore.instance.collection('chats').get().asStream();
 
     await for (var value in stream) {
-      chats = value.docs.map((doc) => ChatModel.fromJson(doc.data())).toList();
+      toStore =
+          value.docs.map((doc) => ChatModel.fromJson(doc.data())).toList();
       setState(() {});
     }
-    for (int i = 0; i < chats.length; i++) {
-      if (!chats[i].isGroupChat) {
-        if (chats[i].usersId.length == uids.length &&
-            chats[i].usersId.every(uids.contains)) {
-          continue;
+    for (int i = 0; i < toStore.length; i++) {
+      if (!toStore[i].isGroupChat) {
+        if (toStore[i].usersId.length == uids.length &&
+            toStore[i].usersId.every(uids.contains)) {
+          toReturnChats.insert(0, toStore[i]);
         }
       }
-      chats.removeAt(i);
     }
-    return chats;
+    return toReturnChats;
   }
 
   void tapPrivateMessage() async {

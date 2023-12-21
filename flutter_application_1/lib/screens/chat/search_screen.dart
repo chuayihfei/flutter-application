@@ -4,7 +4,7 @@ import 'package:flutter_application_1/model/user.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
 import 'package:flutter_application_1/widgets/custom_text_form_field.dart';
 import 'package:flutter_application_1/widgets/empty_widget.dart';
-import 'package:flutter_application_1/widgets/user_item.dart';
+import 'package:flutter_application_1/widgets/private_user_item.dart';
 import 'package:provider/provider.dart';
 
 class UsersSearchScreen extends StatefulWidget {
@@ -76,7 +76,7 @@ class _UsersSearchScreenState extends State<UsersSearchScreen> {
                           itemBuilder: (context, index) =>
                               value.search[index].uid !=
                                       FirebaseAuth.instance.currentUser?.uid
-                                  ? UserItem(user: value.search[index])
+                                  ? PrivateUserItem(user: value.search[index])
                                   : const SizedBox(),
                         ),
                 ),
