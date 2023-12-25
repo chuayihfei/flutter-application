@@ -8,8 +8,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/check_in/check_in.dart';
 import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
+import 'package:flutter_application_1/screens/chat/chats_screen.dart';
 import 'package:flutter_application_1/screens/home_screens/home_screen_before.dart';
 import 'package:flutter_application_1/screens/way_finder/way_finder.dart';
+import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 
 class HomeScreenAfter extends StatefulWidget {
   const HomeScreenAfter({Key? key}) : super(key: key);
@@ -29,29 +31,34 @@ class HomeScreenAfterState extends State<HomeScreenAfter> {
 
   void checkOut() async {
     log("Check Out Button Pressed!");
-    User? user = FirebaseAuth.instance.currentUser;
-    DatabaseReference ref =
-        FirebaseDatabase.instance.ref("users/${user?.uid.toString()}");
-    await ref.update({
-      "Location": "",
-      "Checked In": false,
-    });
+    // User? user = FirebaseAuth.instance.currentUser;
+    // DatabaseReference ref =
+    //     FirebaseDatabase.instance.ref("users/${user?.uid.toString()}");
+    // await ref.update({
+    //   "Location": "",
+    //   "Checked In": false,
+    // });
+    FirebaseFirestoreService.checkOut();
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const HomeScreenBefore()));
   }
 
   void groupChat() async {
     log("Group Chat Button Pressed!");
-    // Navigator.popUntil(context, (route) => route.isFirst);
-    // Navigator.pushReplacement(
-    //     context, CupertinoPageRoute(builder: (context) => const LoginScreen()));
+    Navigator.popUntil(context, (route) => route.isFirst);
+
+    log("After Pop after pressed");
+    Navigator.push(
+        context, CupertinoPageRoute(builder: (context) => const ChatsScreen()));
+
+    log("After PushReplacement after pressed");
   }
 
   void wayFinder() async {
     log("Way Finder Button Pressed!");
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const WayFinderScreen()));
   }
 

@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/check_in/check_in.dart';
 import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
+import 'package:flutter_application_1/screens/chat/chats_screen.dart';
 import 'package:flutter_application_1/screens/way_finder/way_finder.dart';
 
 class HomeScreenBefore extends StatefulWidget {
@@ -21,28 +22,28 @@ class HomeScreenBeforeState extends State<HomeScreenBefore> {
     await FirebaseAuth.instance.signOut();
 
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(
+    Navigator.push(
         context, CupertinoPageRoute(builder: (context) => const LoginScreen()));
   }
 
   void checkIn() async {
     log("Check In Button Pressed!");
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const CheckInScreen()));
   }
 
   void groupChat() async {
     log("Group Chat Button Pressed!");
-    // Navigator.popUntil(context, (route) => route.isFirst);
-    // Navigator.pushReplacement(
-    //     context, CupertinoPageRoute(builder: (context) => const LoginScreen()));
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.push(
+        context, CupertinoPageRoute(builder: (context) => const ChatsScreen()));
   }
 
   void wayFinder() async {
     log("Way Finder Button Pressed!");
     Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(context,
+    Navigator.push(context,
         CupertinoPageRoute(builder: (context) => const WayFinderScreen()));
   }
 
