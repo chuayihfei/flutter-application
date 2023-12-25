@@ -22,9 +22,7 @@ public class getDistance : MonoBehaviour
     void Update()
     {
         path = navigationManager.CalculatedPath;
-        //DisplayDistanceRemaining();
-
-        getAngle();
+        DisplayDistanceRemaining();
     }
 
     private float GetPathDistance()
@@ -47,27 +45,6 @@ public class getDistance : MonoBehaviour
         displayRemainingText.text = GetPathDistance().ToString("F2");
 
         displayRemainingText.text += " m";
-    }
-
-    private void getAngle()
-    {
-        if (path.status != NavMeshPathStatus.PathInvalid)
-        {
-            float angle = Vector3.Angle(path.corners[1] - arOrigin.Camera.transform.position, arOrigin.Camera.transform.forward);
-
-            displayRemainingText.text = angle.ToString();
-            //Debug.Log(angle);
-
-            Debug.DrawLine(arOrigin.transform.position, path.corners[1], Color.blue);
-            Debug.DrawRay(arOrigin.transform.position, arOrigin.Camera.transform.forward, Color.red);
-
-            
-            if (angle > 40.0f)
-            {
-                //vibrate until looking at line
-                //Handheld.Vibrate();
-            }
-        }
     }
 
 }
