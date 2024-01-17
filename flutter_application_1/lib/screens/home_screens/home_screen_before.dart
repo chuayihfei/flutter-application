@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/check_in/check_in.dart';
-import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
+import 'package:flutter_application_1/screens/login_screen/login_screen.dart';
 import 'package:flutter_application_1/screens/chat/chats_screen.dart';
 import 'package:flutter_application_1/screens/way_finder/way_finder.dart';
 
