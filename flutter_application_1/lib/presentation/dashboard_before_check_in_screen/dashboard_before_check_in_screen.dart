@@ -5,7 +5,7 @@ import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart'
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:flutter_application_1/widgets/app_bar/custom_app_bar.dart';
-import 'package:flutter_application_1/widgets/custom_button_app_bar.dart';
+import 'package:flutter_application_1/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter_application_1/widgets/custom_floating_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'provider/dashboard_before_check_in_provider.dart';
@@ -22,7 +22,7 @@ class DashboardBeforeCheckInScreen extends StatefulWidget {
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => DashboardBeforeCheckInProvider(),
-      child: DashboardBeforeCheckInScreen(),
+      child: const DashboardBeforeCheckInScreen(),
     );
   }
 }
@@ -722,11 +722,7 @@ class DashboardBeforeCheckInScreenState
           height: 65,
           width: 63,
           backgroundColor: theme.colorScheme.primary,
-          child: CustomImageView(
-            imagePath: ImageConstant.imgPlus,
-            height: 32.5.v,
-            width: 31.5.h,
-          ),
+          child: const Icon(Icons.add, color: Colors.white, size: 37.5),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
@@ -763,31 +759,37 @@ class DashboardBeforeCheckInScreenState
 
   /// Section Widget
   Widget _buildStatusBar(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 3.h),
-      padding: EdgeInsets.symmetric(
-        horizontal: 97.h,
-        vertical: 19.v,
-      ),
-      decoration: AppDecoration.outlineBlack.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder10,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(height: 5.v),
-          Text(
-            "lbl_not_checked_in".tr,
-            style: CustomTextStyles.headlineSmallMontserratPrimary,
+    return GestureDetector(
+        onTap: () {
+          NavigatorService.pushNamed(AppRoutes.checkInScreen);
+        },
+        child: Container(
+          margin: EdgeInsets.only(left: 3.h),
+          padding: EdgeInsets.symmetric(
+            horizontal: 97.h,
+            vertical: 19.v,
           ),
-        ],
-      ),
-    );
+          decoration: AppDecoration.outlineBlack.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder10,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 5.v),
+              Text(
+                "lbl_not_checked_in".tr,
+                style: CustomTextStyles.headlineSmallMontserratPrimary,
+              ),
+            ],
+          ),
+        ));
   }
 
   /// Section Widget
   Widget _buildCard(BuildContext context) {
-    return Container();
+    return Container(
+      color: Colors.purple,
+    );
   }
 
   /// Section Widget

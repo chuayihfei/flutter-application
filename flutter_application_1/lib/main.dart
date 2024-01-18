@@ -93,13 +93,13 @@ class MyApp extends StatelessWidget {
                 title: 'internssbs_s_application',
                 navigatorKey: NavigatorService.navigatorKey,
                 debugShowCheckedModeBanner: false,
-                localizationsDelegates: [
+                localizationsDelegates: const [
                   AppLocalizationDelegate(),
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                supportedLocales: [
+                supportedLocales: const [
                   Locale(
                     'en',
                     '',

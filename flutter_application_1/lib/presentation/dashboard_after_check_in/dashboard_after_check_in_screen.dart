@@ -9,7 +9,7 @@ import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart'
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:flutter_application_1/widgets/app_bar/custom_app_bar.dart';
-import 'package:flutter_application_1/widgets/custom_button_app_bar.dart';
+import 'package:flutter_application_1/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter_application_1/widgets/custom_floating_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

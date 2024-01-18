@@ -32,8 +32,8 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
   Widget build(BuildContext context) {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-      child: SizedBox(
-        height: 28.v,
+      child: Container(
+        height: 60.v,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(

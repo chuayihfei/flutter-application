@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/check_in_screen/check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/dashboard_after_check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_container_screen/dashboard_before_check_in_container_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/dashboard_before_check_in_screen.dart';
@@ -35,6 +36,8 @@ class AppRoutes {
 
   static const String initialRoute = '/initialRoute';
 
+  static const String checkInScreen = '/check_in_screen';
+
   static Map<String, WidgetBuilder> get routes => {
         splashScreen: SplashScreen.builder,
         loginWithEmailIdScreen: LoginWithEmailIdScreen.builder,
@@ -43,6 +46,8 @@ class AppRoutes {
         dahsboardBeforeCheckInContainerScreen:
             DahsboardBeforeCheckInContainerScreen.builder,
         dashboardAfterCheckInScreen: DashboardAfterCheckInScreen.builder,
+        checkInScreen: CheckInScreen.builder,
+
         // chatsScreenOneScreen: ChatsScreenOneScreen.builder,
         // chatsScreen: ChatsScreen.builder,
         // chatsScreenTwoScreen: ChatsScreenTwoScreen.builder,
