@@ -796,8 +796,7 @@ class DashboardBeforeCheckInScreenState
   Widget _buildBottomAppBar(BuildContext context) {
     return CustomBottomAppBar(
       onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
+        NavigatorService.pushNamed(getCurrentRoute(type));
       },
     );
   }
@@ -806,9 +805,9 @@ class DashboardBeforeCheckInScreenState
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Dashboard:
-        return "/";
+        return AppRoutes.dashboardBeforeCheckInScreen;
       case BottomBarEnum.Chats:
-        return AppRoutes.dahsboardBeforeCheckInPage;
+        return "/";
       default:
         return "/";
     }

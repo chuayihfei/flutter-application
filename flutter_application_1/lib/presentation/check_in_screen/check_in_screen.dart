@@ -128,8 +128,7 @@ class CheckInScreenState extends State<CheckInScreen> {
   Widget _buildBottomAppBar(BuildContext context) {
     return CustomBottomAppBar(
       onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
+        NavigatorService.pushNamed(getCurrentRoute(type));
       },
     );
   }
@@ -138,7 +137,7 @@ class CheckInScreenState extends State<CheckInScreen> {
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Dashboard:
-        return "/";
+        return AppRoutes.dashboardBeforeCheckInScreen;
       case BottomBarEnum.Chats:
         return AppRoutes.dahsboardBeforeCheckInContainerScreen;
       default:
