@@ -75,7 +75,8 @@ public class GPSMapDisplay : MonoBehaviour
         {
             mapLoading = false;
 
-            gameObject.GetComponent<RawImage>().texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            //change texture
+            //gameObject.GetComponent<RawImage>().texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
 
             apiKeyLast = apiKey;
             latLast = lat;
