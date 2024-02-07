@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/app_export.dart';
+import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_page/dashboard_before_check_in_page.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
@@ -805,9 +806,9 @@ class DashboardBeforeCheckInScreenState
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Dashboard:
-        return AppRoutes.dashboardBeforeCheckInScreen;
+        return AppRoutes.dahsboardBeforeCheckInPage;
       case BottomBarEnum.Chats:
-        return "/";
+        return AppRoutes.chatsScreen;
       default:
         return "/";
     }
@@ -821,8 +822,10 @@ class DashboardBeforeCheckInScreenState
     switch (currentRoute) {
       case AppRoutes.dahsboardBeforeCheckInPage:
         return DahsboardBeforeCheckInPage.builder(context);
+      case AppRoutes.chatsScreen:
+        return ChatsScreen.builder(context);
       default:
-        return DefaultWidget();
+        return const DefaultWidget();
     }
   }
 }

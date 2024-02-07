@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/firebase_options.dart';
+import 'package:flutter_application_1/provider/firebase_provider.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/app_export.dart';
@@ -25,7 +26,7 @@ Future<void> main() async {
 
   FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
 
-  runApp(MyApp());
+  runApp(const MyApp());
   //NotificationService().initLocalNotification();
 }
 
@@ -80,12 +81,17 @@ final navigatorKey = GlobalKey<NavigatorState>();
 //       );
 // }
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return ChangeNotifierProvider(
-          create: (context) => ThemeProvider(),
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => ThemeProvider()),
+            ChangeNotifierProvider(create: (_) => FirebaseProvider())
+          ],
           child: Consumer<ThemeProvider>(
             builder: (context, provider, child) {
               return MaterialApp(

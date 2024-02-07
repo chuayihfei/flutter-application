@@ -22,7 +22,7 @@ class List1ItemWidget extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 92.v,
+              height: 88.v,
               width: 108.h,
               decoration: BoxDecoration(
                 color: appTheme.greenA700,

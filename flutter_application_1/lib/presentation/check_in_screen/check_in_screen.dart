@@ -60,7 +60,8 @@ class CheckInScreenState extends State<CheckInScreen> {
     log("Received message from Unity: ${message.toString()}");
     FirebaseFirestoreService.checkIn(message.toString());
 
-    NavigatorService.popAndPushNamed(AppRoutes.dashboardAfterCheckInScreen);
+    NavigatorService.popAndPushNamed(AppRoutes.dashboardAfterCheckInScreen,
+        arguments: message.toString());
   }
 
   @override

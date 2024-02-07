@@ -26,10 +26,10 @@ class ChatModel {
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (chatId != null) "chatId": chatId,
-      if (chatName != null) "chatName": chatName,
-      if (isGroupChat != null) "isGroupChat": isGroupChat,
-      if (usersId != null) "usersId": usersId,
+      "chatId": chatId,
+      "chatName": chatName,
+      "isGroupChat": isGroupChat,
+      "usersId": usersId,
     };
   }
 

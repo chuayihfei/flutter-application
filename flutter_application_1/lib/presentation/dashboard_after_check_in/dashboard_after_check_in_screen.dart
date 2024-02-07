@@ -1,10 +1,13 @@
 import 'package:flutter_application_1/core/app_export.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/models/list_item_model.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/provider/dashboard_after_check_in_provider.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/widgets/list_item_widget.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_page/dashboard_before_check_in_page.dart';
+import 'package:flutter_application_1/provider/firebase_provider.dart';
+import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_trailing_image.dart';
@@ -14,29 +17,36 @@ import 'package:flutter_application_1/widgets/custom_floating_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DashboardAfterCheckInScreen extends StatefulWidget {
-  const DashboardAfterCheckInScreen({Key? key})
-      : super(
-          key: key,
-        );
+  const DashboardAfterCheckInScreen({super.key, required this.location});
+
+  final String location;
 
   @override
   DashboardAfterCheckInScreenState createState() =>
       DashboardAfterCheckInScreenState();
-  static Widget builder(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DashboardAfterCheckInProvider(),
-      child: DashboardAfterCheckInScreen(),
-    );
-  }
+
+  // static Widget builder(BuildContext context) {
+  //   return DashboardAfterCheckInScreen(
+  //     location: location,
+  //   );
+  // }
 }
 
 class DashboardAfterCheckInScreenState
     extends State<DashboardAfterCheckInScreen> {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+  String location = "";
 
   @override
   void initState() {
     super.initState();
+  }
+
+  void checkOut(String location) async {
+    log("Check out button pressde");
+
+    FirebaseFirestoreService.checkOut(location);
+    NavigatorService.popAndPushNamed(AppRoutes.dashboardAfterCheckInScreen);
   }
 
   @override
@@ -133,20 +143,24 @@ class DashboardAfterCheckInScreenState
 
   /// Section Widget
   Widget _buildStatusBar(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 9.h),
-      padding: EdgeInsets.symmetric(
-        horizontal: 157.h,
-        vertical: 22.v,
-      ),
-      decoration: AppDecoration.outlineBlack900.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder10,
-      ),
-      child: Text(
-        "lbl_kovan".tr,
-        style: CustomTextStyles.headlineSmallMontserratBlack900,
-      ),
-    );
+    return GestureDetector(
+        onTap: () {
+          checkOut(widget.location);
+        },
+        child: Container(
+          margin: EdgeInsets.only(right: 9.h),
+          padding: EdgeInsets.symmetric(
+            horizontal: 157.h,
+            vertical: 22.v,
+          ),
+          decoration: AppDecoration.outlineBlack900.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder10,
+          ),
+          child: Text(
+            widget.location.tr,
+            style: CustomTextStyles.headlineSmallMontserratBlack900,
+          ),
+        ));
   }
 
   /// Section Widget
@@ -206,9 +220,9 @@ class DashboardAfterCheckInScreenState
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Dashboard:
-        return "/";
-      case BottomBarEnum.Chats:
         return AppRoutes.dahsboardBeforeCheckInPage;
+      case BottomBarEnum.Chats:
+        return AppRoutes.chatsScreen;
       default:
         return "/";
     }
@@ -222,6 +236,8 @@ class DashboardAfterCheckInScreenState
     switch (currentRoute) {
       case AppRoutes.dahsboardBeforeCheckInPage:
         return DahsboardBeforeCheckInPage.builder(context);
+      case AppRoutes.chatsScreen:
+        return ChatsScreen.builder(context);
       default:
         return const DefaultWidget();
     }

@@ -8,7 +8,7 @@ import '../core/app_export.dart';
 class CustomTextStyles {
   // Body text style
   static get bodyLargeff848fad => theme.textTheme.bodyLarge!.copyWith(
-        color: Color(0XFF848FAD),
+        color: const Color(0XFF848FAD),
       );
   static get bodyMediumHelveticaBlack900 =>
       theme.textTheme.bodyMedium!.helvetica.copyWith(
@@ -32,9 +32,7 @@ class CustomTextStyles {
       );
   static get headlineSmallMontserratBlack900 =>
       theme.textTheme.headlineSmall!.montserrat.copyWith(
-        color: appTheme.black900,
-        fontWeight: FontWeight.w600,
-      );
+          color: appTheme.black900, fontWeight: FontWeight.bold, fontSize: 20);
   static get headlineSmallMontserratPrimary =>
       theme.textTheme.headlineSmall!.montserrat.copyWith(
         color: theme.colorScheme.primary,
@@ -66,12 +64,12 @@ class CustomTextStyles {
         fontWeight: FontWeight.w500,
       );
   static get titleMediumff14171f => theme.textTheme.titleMedium!.copyWith(
-        color: Color(0XFF14171F),
+        color: const Color(0XFF14171F),
         fontSize: 16.fSize,
         fontWeight: FontWeight.w700,
       );
   static get titleMediumff5c1d78 => theme.textTheme.titleMedium!.copyWith(
-        color: Color(0XFF5C1D78),
+        color: const Color(0XFF5C1D78),
         fontSize: 16.fSize,
         fontWeight: FontWeight.w700,
       );

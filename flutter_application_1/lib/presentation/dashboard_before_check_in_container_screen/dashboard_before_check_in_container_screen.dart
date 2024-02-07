@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_container_screen/provider/dashboard_before_check_in_container_provider.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_page/dashboard_before_check_in_page.dart';
 import 'package:flutter_application_1/widgets/custom_bottom_app_bar.dart';
@@ -16,7 +17,7 @@ class DahsboardBeforeCheckInContainerScreen extends StatefulWidget {
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => DahsboardBeforeCheckInContainerProvider(),
-        child: DahsboardBeforeCheckInContainerScreen());
+        child: const DahsboardBeforeCheckInContainerScreen());
   }
 }
 
@@ -62,12 +63,13 @@ class DahsboardBeforeCheckInContainerScreenState
   }
 
   ///Handling route based on bottom click actions
+  ///Handling route based on bottom click actions
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Dashboard:
-        return "/";
-      case BottomBarEnum.Chats:
         return AppRoutes.dahsboardBeforeCheckInPage;
+      case BottomBarEnum.Chats:
+        return AppRoutes.chatsScreen;
       default:
         return "/";
     }
@@ -81,8 +83,10 @@ class DahsboardBeforeCheckInContainerScreenState
     switch (currentRoute) {
       case AppRoutes.dahsboardBeforeCheckInPage:
         return DahsboardBeforeCheckInPage.builder(context);
+      case AppRoutes.chatsScreen:
+        return ChatsScreen.builder(context);
       default:
-        return DefaultWidget();
+        return const DefaultWidget();
     }
   }
 }

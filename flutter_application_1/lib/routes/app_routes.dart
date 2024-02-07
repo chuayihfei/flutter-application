@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dart';
 import 'package:flutter_application_1/presentation/check_in_screen/check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/dashboard_after_check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_container_screen/dashboard_before_check_in_container_screen.dart';
@@ -45,11 +46,12 @@ class AppRoutes {
         dashboardBeforeCheckInScreen: DashboardBeforeCheckInScreen.builder,
         dahsboardBeforeCheckInContainerScreen:
             DahsboardBeforeCheckInContainerScreen.builder,
-        dashboardAfterCheckInScreen: DashboardAfterCheckInScreen.builder,
+        dashboardAfterCheckInScreen: (BuildContext context) =>
+            const DashboardAfterCheckInScreen(location: ""),
         checkInScreen: CheckInScreen.builder,
+        chatsScreen: ChatsScreen.builder,
 
         // chatsScreenOneScreen: ChatsScreenOneScreen.builder,
-        // chatsScreen: ChatsScreen.builder,
         // chatsScreenTwoScreen: ChatsScreenTwoScreen.builder,
         // appNavigationScreen: AppNavigationScreen.builder,
         initialRoute: SplashScreen.builder

@@ -120,13 +120,50 @@ class FirebaseFirestoreService {
     return snapshot.docs.map((doc) => UserModel.fromJson(doc.data())).toList();
   }
 
-  static Future<void> checkIn(String location) async => await firestore
-      .collection('users')
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({"location": location, "checkedIn": true});
+  static Future<void> checkIn(String location) async {
+    await firestore
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({"location": location, "checkedIn": true});
 
-  static Future<void> checkOut() async => await firestore
-      .collection('users')
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({"location": "", "checkedIn": false});
+    await firestore
+        .collection('locations')
+        .doc(location)
+        .update({"number of people": FieldValue.increment(1)});
+  }
+
+  static Future<void> checkOut(String location) async {
+    await firestore
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({"location": "", "checkedIn": false});
+
+    await firestore
+        .collection('locations')
+        .doc(location)
+        .update({"number of people": FieldValue.increment(-1)});
+  }
+
+  static Future<void> locationCheckIn(String location) async => await firestore
+      .collection('locations')
+      .doc(location)
+      .update({"number of people": FieldValue.increment(1)});
+
+  static Future<void> locationCheckOut(String location) async => await firestore
+      .collection('locations')
+      .doc(location)
+      .update({"number of people": FieldValue.increment(-1)});
+
+  static Future<void> stationCheckIn(String location, String station) async =>
+      await firestore.collection('locations/$location').doc(station).update({
+        "number of people": FieldValue.increment(1),
+        "users": FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
+      });
+
+  static Future<void> stationCheckOut(String location, String station) async =>
+      await firestore.collection('locations/$location').doc(station).update({
+        "number of people": FieldValue.increment(-1),
+        "users":
+            FieldValue.arrayRemove([FirebaseAuth.instance.currentUser!.uid])
+      });
 }
