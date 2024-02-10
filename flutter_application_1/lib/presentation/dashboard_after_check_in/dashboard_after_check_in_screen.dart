@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_application_1/presentation/dashboard_after_check_in/widg
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_page/dashboard_before_check_in_page.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
+import 'package:flutter_application_1/services/notification_service.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_trailing_image.dart';
@@ -17,29 +20,67 @@ import 'package:flutter_application_1/widgets/custom_floating_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DashboardAfterCheckInScreen extends StatefulWidget {
-  const DashboardAfterCheckInScreen({super.key, required this.location});
-
-  final String location;
+  const DashboardAfterCheckInScreen({Key? key})
+      : super(
+          key: key,
+        );
 
   @override
   DashboardAfterCheckInScreenState createState() =>
       DashboardAfterCheckInScreenState();
-
-  // static Widget builder(BuildContext context) {
-  //   return DashboardAfterCheckInScreen(
-  //     location: location,
-  //   );
-  // }
+  static Widget builder(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => DashboardAfterCheckInProvider(),
+      child: const DashboardAfterCheckInScreen(),
+    );
+  }
 }
 
 class DashboardAfterCheckInScreenState
-    extends State<DashboardAfterCheckInScreen> {
+    extends State<DashboardAfterCheckInScreen> with WidgetsBindingObserver {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-  String location = "";
+  final notificationService = NotificationService();
+  var user;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    user = Provider.of<FirebaseProvider>(context, listen: false)
+        .getUserById(FirebaseAuth.instance.currentUser!.uid);
+    notificationService.firebaseNotification(context);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        FirebaseFirestoreService.updateUserData({
+          'lastActive': DateTime.now(),
+          'isOnline': true,
+        });
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.hidden:
+      case AppLifecycleState.detached:
+        FirebaseFirestoreService.updateUserData({'isOnline': false});
+        break;
+    }
+  }
+
+  Color getCapacityColor(int capacity, int checkedIn) {
+    double result = checkedIn / capacity;
+
+    if (result == 1) {
+      return appTheme.greenA700;
+    } else if (result >= 0.5) {
+      return appTheme.orange700;
+    } else {
+      return appTheme.redA700;
+    }
   }
 
   void checkOut(String location) async {
@@ -143,24 +184,60 @@ class DashboardAfterCheckInScreenState
 
   /// Section Widget
   Widget _buildStatusBar(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          checkOut(widget.location);
-        },
-        child: Container(
-          margin: EdgeInsets.only(right: 9.h),
-          padding: EdgeInsets.symmetric(
-            horizontal: 157.h,
-            vertical: 22.v,
-          ),
-          decoration: AppDecoration.outlineBlack900.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder10,
-          ),
-          child: Text(
-            widget.location.tr,
-            style: CustomTextStyles.headlineSmallMontserratBlack900,
-          ),
-        ));
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser?.uid)
+            .snapshots(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          return StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('locations')
+                  .doc((snapshot.data!.data()
+                      as Map<String, dynamic>)['location'])
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<DocumentSnapshot> snpshot) {
+                if (snpshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+                return GestureDetector(
+                    onTap: () {
+                      checkOut((snapshot.data!.data()
+                          as Map<String, dynamic>)['location']);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(right: 9.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 135.h,
+                        vertical: 22.v,
+                      ),
+                      decoration: BoxDecoration(
+                        color: getCapacityColor(
+                            (snpshot.data!.data()
+                                as Map<String, dynamic>)['capacity'],
+                            (snpshot.data!.data()
+                                as Map<String, dynamic>)['number of people']),
+                        border: Border.all(
+                          color: appTheme.black900,
+                          width: 1.h,
+                        ),
+                      ).copyWith(
+                        borderRadius: BorderRadiusStyle.roundedBorder10,
+                      ),
+                      child: Text(
+                        (snapshot.data!.data()
+                                as Map<String, dynamic>)['location']
+                            .toString()
+                            .capitalize()
+                            .tr,
+                        style: CustomTextStyles.headlineSmallMontserratBlack900,
+                      ),
+                    ));
+              });
+        });
   }
 
   /// Section Widget
@@ -210,8 +287,7 @@ class DashboardAfterCheckInScreenState
   Widget _buildBottomAppBar(BuildContext context) {
     return CustomBottomAppBar(
       onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
+        NavigatorService.pushNamed(getCurrentRoute(type));
       },
     );
   }

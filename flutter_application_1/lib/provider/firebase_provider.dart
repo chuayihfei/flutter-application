@@ -31,7 +31,7 @@ class FirebaseProvider extends ChangeNotifier {
     return users;
   }
 
-  UserModel? getUserById(String userId) {
+  Future<UserModel?> getUserById(String userId) async {
     FirebaseFirestore.instance
         .collection('users')
         .doc(userId)

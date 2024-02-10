@@ -46,8 +46,7 @@ class AppRoutes {
         dashboardBeforeCheckInScreen: DashboardBeforeCheckInScreen.builder,
         dahsboardBeforeCheckInContainerScreen:
             DahsboardBeforeCheckInContainerScreen.builder,
-        dashboardAfterCheckInScreen: (BuildContext context) =>
-            const DashboardAfterCheckInScreen(location: ""),
+        dashboardAfterCheckInScreen: DashboardAfterCheckInScreen.builder,
         checkInScreen: CheckInScreen.builder,
         chatsScreen: ChatsScreen.builder,
 

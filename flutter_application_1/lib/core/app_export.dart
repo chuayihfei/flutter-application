@@ -21,3 +21,9 @@ export 'package:flutter_application_1/widgets/custom_image_view.dart';
 export 'package:flutter_application_1/routes/app_routes.dart';
 export 'package:provider/provider.dart';
 export 'dart:developer';
+
+extension StringExtensions on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+}
