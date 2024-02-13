@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/chat.dart';
 import 'package:flutter_application_1/model/message.dart';
@@ -32,7 +31,7 @@ class FirebaseProvider extends ChangeNotifier {
     return users;
   }
 
-  UserModel? getUserById(String userId) {
+  Future<UserModel?> getUserById(String userId) async {
     FirebaseFirestore.instance
         .collection('users')
         .doc(userId)

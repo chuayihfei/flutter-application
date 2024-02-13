@@ -37,13 +37,13 @@ class UserModel {
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (uid != null) "uid": uid,
-      if (name != null) "name": name,
-      if (email != null) "email": email,
-      if (isOnline != null) "isOnline": isOnline,
-      if (lastActive != null) "lastActive": lastActive,
-      if (location != null) "location": location,
-      if (checkedIn != null) "checkedIn": checkedIn,
+      "uid": uid,
+      "name": name,
+      "email": email,
+      "isOnline": isOnline,
+      "lastActive": lastActive,
+      "location": location,
+      "checkedIn": checkedIn,
     };
   }
 

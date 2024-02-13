@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/user.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
-import 'package:flutter_application_1/widgets/custom_text_form_field.dart';
 import 'package:flutter_application_1/widgets/empty_widget.dart';
 import 'package:flutter_application_1/widgets/private_user_item.dart';
 import 'package:provider/provider.dart';
@@ -58,13 +57,13 @@ class _UsersSearchScreenState extends State<UsersSearchScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              CustomTextFormField(
-                controller: controller,
-                hintText: 'Search',
-                onChanged: (val) =>
-                    Provider.of<FirebaseProvider>(context, listen: false)
-                        .searchUser(val),
-              ),
+              // CustomTextFormField(
+              //   controller: controller,
+              //   hintText: 'Search',
+              //   onChanged: (val) =>
+              //       Provider.of<FirebaseProvider>(context, listen: false)
+              //           .searchUser(val),
+              // ),
               Consumer<FirebaseProvider>(
                 builder: (context, value, child) => Expanded(
                   child: controller.text.isEmpty

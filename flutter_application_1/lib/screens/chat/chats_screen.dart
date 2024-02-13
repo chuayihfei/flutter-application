@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/user.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
-import 'package:flutter_application_1/screens/email_auth/login_screen.dart';
+import 'package:flutter_application_1/screens/login_screen/login_screen.dart';
 import 'package:flutter_application_1/screens/chat/new_chat_screen.dart';
 import 'package:flutter_application_1/screens/chat/search_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';

@@ -54,6 +54,15 @@ dependencies:
   flutter_local_notifications: ^16.1.0
   http: ^0.13.6
   timeago: ^3.6.0
+  cached_network_image: ^3.3.1
+  flutter_svg: ^2.0.9
+  connectivity_plus: ^5.0.2
+  intl: ^0.18.1
+  shared_preferences: ^2.2.2
+  flutter_localizations:
+    sdk: flutter
+  smooth_page_indicator: ^1.1.0
+  carousel_slider: ^4.2.1
 
 
 dev_dependencies:
@@ -72,7 +81,46 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets: 
+    - assets/
+    - assets/images/
+  fonts: 
+    - family: Montserrat
+      fonts: 
+        - asset: assets/fonts/MontserratSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/MontserratMedium.ttf
+          weight: 500
+        - asset: assets/fonts/MontserratRegular.ttf
+          weight: 400
+        - asset: assets/fonts/MontserratRomanBold.ttf
+          weight: 700
+    - family: Raleway
+      fonts: 
+        - asset: assets/fonts/RalewayRomanBold.ttf
+          weight: 700
+    - family: Inter
+      fonts: 
+        - asset: assets/fonts/InterMedium.ttf
+          weight: 500
+        - asset: assets/fonts/InterRegular.ttf
+          weight: 400
+    - family: Roboto
+      fonts: 
+        - asset: assets/fonts/RobotoRegular.ttf
+          weight: 400
+    - family: Poppins
+      fonts: 
+        - asset: assets/fonts/PoppinsMedium.ttf
+          weight: 500
+        - asset: assets/fonts/PoppinsRegular.ttf
+          weight: 400
+        - asset: assets/fonts/PoppinsBlack.ttf
+          weight: 900
+        - asset: assets/fonts/PoppinsLight.ttf
+          weight: 300
+        - asset: assets/fonts/PoppinsBold.ttf
+          weight: 700
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

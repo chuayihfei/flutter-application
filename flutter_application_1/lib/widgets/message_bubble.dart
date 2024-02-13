@@ -39,7 +39,8 @@ class MessageBubble extends StatelessWidget {
             crossAxisAlignment:
                 isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
             children: [
-              Text(message.senderName.toString()),
+              Text(message.senderName.toString(),
+                  style: const TextStyle(color: Colors.black)),
               isImage
                   ? Container(
                       height: 200,

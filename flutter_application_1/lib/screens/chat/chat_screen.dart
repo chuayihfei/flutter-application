@@ -45,6 +45,7 @@ class ChatScreenState extends State<ChatScreen> {
                 children: [
                   CircleAvatar(
                     radius: 20,
+                    backgroundColor: Colors.blue,
                   ),
                   const SizedBox(width: 10),
                   Column(
