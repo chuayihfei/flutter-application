@@ -155,13 +155,19 @@ class FirebaseFirestoreService {
       .update({"number of people": FieldValue.increment(-1)});
 
   static Future<void> stationCheckIn(String location, String station) async =>
-      await firestore.collection('locations/$location').doc(station).update({
+      await firestore
+          .collection('locations/$location/substations')
+          .doc(station)
+          .update({
         "number of people": FieldValue.increment(1),
         "users": FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
       });
 
   static Future<void> stationCheckOut(String location, String station) async =>
-      await firestore.collection('locations/$location').doc(station).update({
+      await firestore
+          .collection('locations/$location/substations')
+          .doc(station)
+          .update({
         "number of people": FieldValue.increment(-1),
         "users":
             FieldValue.arrayRemove([FirebaseAuth.instance.currentUser!.uid])

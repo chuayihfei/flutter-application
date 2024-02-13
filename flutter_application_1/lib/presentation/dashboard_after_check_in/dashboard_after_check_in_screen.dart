@@ -41,6 +41,7 @@ class DashboardAfterCheckInScreenState
     extends State<DashboardAfterCheckInScreen> with WidgetsBindingObserver {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   final notificationService = NotificationService();
+  // ignore: prefer_typing_uninitialized_variables
   var user;
 
   @override
@@ -268,7 +269,9 @@ class DashboardAfterCheckInScreenState
                                     (snpshot.data!.data()
                                         as Map<String, dynamic>)['capacity'],
                                     (snpshot.data!.data() as Map<String,
-                                        dynamic>)['number of people']));
+                                        dynamic>)['number of people']),
+                                (snapshot.data!.data()
+                                    as Map<String, dynamic>)['location']);
                           },
                         );
                       });
