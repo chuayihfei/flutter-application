@@ -28,6 +28,7 @@ class DashboardAfterCheckInScreen extends StatefulWidget {
   @override
   DashboardAfterCheckInScreenState createState() =>
       DashboardAfterCheckInScreenState();
+
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => DashboardAfterCheckInProvider(),
@@ -41,15 +42,6 @@ class DashboardAfterCheckInScreenState
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   final notificationService = NotificationService();
   var user;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    user = Provider.of<FirebaseProvider>(context, listen: false)
-        .getUserById(FirebaseAuth.instance.currentUser!.uid);
-    notificationService.firebaseNotification(context);
-  }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -71,6 +63,15 @@ class DashboardAfterCheckInScreenState
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    user = Provider.of<FirebaseProvider>(context, listen: false)
+        .getUserById(FirebaseAuth.instance.currentUser!.uid);
+    notificationService.firebaseNotification(context);
+  }
+
   Color getCapacityColor(int capacity, int checkedIn) {
     double result = checkedIn / capacity;
 
@@ -90,68 +91,31 @@ class DashboardAfterCheckInScreenState
     NavigatorService.popAndPushNamed(AppRoutes.dashboardAfterCheckInScreen);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(
-            horizontal: 13.h,
-            vertical: 6.v,
-          ),
-          child: Column(
-            children: [
-              _buildStatusBar(context),
-              SizedBox(height: 25.v),
-              _buildSlider(context),
-              SizedBox(height: 28.v),
-              SizedBox(
-                height: 7.v,
-                child: AnimatedSmoothIndicator(
-                  activeIndex: 0,
-                  count: 3,
-                  effect: ScrollingDotsEffect(
-                    spacing: 2,
-                    activeDotColor: theme.colorScheme.primary,
-                    dotColor: appTheme.blueGray100,
-                    dotHeight: 7.v,
-                    dotWidth: 10.h,
-                  ),
-                ),
-              ),
-              SizedBox(height: 23.v),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 7.h),
-                  child: Text(
-                    "lbl_location".tr,
-                    style: CustomTextStyles.headlineSmallMontserratPrimary,
-                  ),
-                ),
-              ),
-              SizedBox(height: 25.v),
-              _buildList(context),
-              SizedBox(height: 25.v),
-            ],
-          ),
-        ),
-        bottomNavigationBar: _buildBottomAppBar(context),
-        floatingActionButton: CustomFloatingButton(
-          height: 65,
-          width: 63,
-          backgroundColor: theme.colorScheme.primary,
-          child: CustomImageView(
-            imagePath: ImageConstant.imgPlus,
-            height: 32.5.v,
-            width: 31.5.h,
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      ),
-    );
+  ///Handling route based on bottom click actions
+  String getCurrentRoute(BottomBarEnum type) {
+    switch (type) {
+      case BottomBarEnum.Dashboard:
+        return AppRoutes.dahsboardBeforeCheckInPage;
+      case BottomBarEnum.Chats:
+        return AppRoutes.chatsScreen;
+      default:
+        return "/";
+    }
+  }
+
+  ///Handling page based on route
+  Widget getCurrentPage(
+    BuildContext context,
+    String currentRoute,
+  ) {
+    switch (currentRoute) {
+      case AppRoutes.dahsboardBeforeCheckInPage:
+        return DahsboardBeforeCheckInPage.builder(context);
+      case AppRoutes.chatsScreen:
+        return ChatsScreen.builder(context);
+      default:
+        return const DefaultWidget();
+    }
   }
 
   /// Section Widget
@@ -248,39 +212,69 @@ class DashboardAfterCheckInScreenState
   /// Section Widget
   Widget _buildList(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
-      child: SizedBox(
-        height: 113.v,
-        child: Consumer<DashboardAfterCheckInProvider>(
-          builder: (context, provider, child) {
-            return ListView.separated(
-              padding: EdgeInsets.only(
-                left: 7.h,
-                right: 23.h,
-              ),
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (
-                context,
-                index,
-              ) {
-                return SizedBox(
-                  width: 24.h,
-                );
-              },
-              itemCount:
-                  provider.dashboardAfterCheckInModelObj.list1ItemList.length,
-              itemBuilder: (context, index) {
-                List1ItemModel model =
-                    provider.dashboardAfterCheckInModelObj.list1ItemList[index];
-                return List1ItemWidget(
-                  model,
-                );
-              },
-            );
-          },
-        ),
-      ),
-    );
+        alignment: Alignment.centerLeft,
+        child: SizedBox(
+            height: 113.v,
+            child: Consumer<DashboardAfterCheckInProvider>(
+                builder: (context, provider, child) {
+              return StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                    .snapshots(),
+                builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+                  return ListView.separated(
+                      padding: EdgeInsets.only(
+                        left: 7.h,
+                        right: 23.h,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (
+                        context,
+                        index,
+                      ) {
+                        return SizedBox(
+                          width: 24.h,
+                        );
+                      },
+                      itemCount: provider
+                          .dashboardAfterCheckInModelObj.list1ItemList.length,
+                      itemBuilder: (context, index) {
+                        return StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('locations')
+                              .doc((snapshot.data!.data()
+                                  as Map<String, dynamic>)['location'])
+                              .collection("substations")
+                              .doc(provider.dashboardAfterCheckInModelObj
+                                  .list1ItemList[index].concourse)
+                              .snapshots(),
+                          builder: (context,
+                              AsyncSnapshot<DocumentSnapshot> snpshot) {
+                            if (snpshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            }
+                            List1ItemModel model = provider
+                                .dashboardAfterCheckInModelObj
+                                .list1ItemList[index];
+
+                            return List1ItemWidget(
+                                model,
+                                getCapacityColor(
+                                    (snpshot.data!.data()
+                                        as Map<String, dynamic>)['capacity'],
+                                    (snpshot.data!.data() as Map<String,
+                                        dynamic>)['number of people']));
+                          },
+                        );
+                      });
+                },
+              );
+            })));
   }
 
   /// Section Widget
@@ -292,30 +286,67 @@ class DashboardAfterCheckInScreenState
     );
   }
 
-  ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
-    switch (type) {
-      case BottomBarEnum.Dashboard:
-        return AppRoutes.dahsboardBeforeCheckInPage;
-      case BottomBarEnum.Chats:
-        return AppRoutes.chatsScreen;
-      default:
-        return "/";
-    }
-  }
-
-  ///Handling page based on route
-  Widget getCurrentPage(
-    BuildContext context,
-    String currentRoute,
-  ) {
-    switch (currentRoute) {
-      case AppRoutes.dahsboardBeforeCheckInPage:
-        return DahsboardBeforeCheckInPage.builder(context);
-      case AppRoutes.chatsScreen:
-        return ChatsScreen.builder(context);
-      default:
-        return const DefaultWidget();
-    }
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: _buildAppBar(context),
+        body: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(
+            horizontal: 13.h,
+            vertical: 6.v,
+          ),
+          child: Column(
+            children: [
+              _buildStatusBar(context),
+              SizedBox(height: 25.v),
+              _buildSlider(context),
+              SizedBox(height: 28.v),
+              SizedBox(
+                height: 7.v,
+                child: AnimatedSmoothIndicator(
+                  activeIndex: 0,
+                  count: 3,
+                  effect: ScrollingDotsEffect(
+                    spacing: 2,
+                    activeDotColor: theme.colorScheme.primary,
+                    dotColor: appTheme.blueGray100,
+                    dotHeight: 7.v,
+                    dotWidth: 10.h,
+                  ),
+                ),
+              ),
+              SizedBox(height: 23.v),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 7.h),
+                  child: Text(
+                    "lbl_location".tr,
+                    style: CustomTextStyles.headlineSmallMontserratPrimary,
+                  ),
+                ),
+              ),
+              SizedBox(height: 25.v),
+              _buildList(context),
+              SizedBox(height: 25.v),
+            ],
+          ),
+        ),
+        bottomNavigationBar: _buildBottomAppBar(context),
+        floatingActionButton: CustomFloatingButton(
+          height: 65,
+          width: 63,
+          backgroundColor: theme.colorScheme.primary,
+          child: CustomImageView(
+            imagePath: ImageConstant.imgPlus,
+            height: 32.5.v,
+            width: 31.5.h,
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
+    );
   }
 }
