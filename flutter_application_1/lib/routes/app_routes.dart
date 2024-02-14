@@ -7,6 +7,7 @@ import 'package:flutter_application_1/presentation/dashboard_before_check_in_scr
 import 'package:flutter_application_1/presentation/login_screen/login_screen.dart';
 import 'package:flutter_application_1/presentation/register_screen/register_screen.dart';
 import 'package:flutter_application_1/presentation/splash_screen/splash_screen.dart';
+import 'package:flutter_application_1/presentation/way_finder_screen/way_finder_screen.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -39,6 +40,8 @@ class AppRoutes {
 
   static const String checkInScreen = '/check_in_screen';
 
+  static const String wayFinderScreen = '/way_finder_screen';
+
   static Map<String, WidgetBuilder> get routes => {
         splashScreen: SplashScreen.builder,
         loginWithEmailIdScreen: LoginWithEmailIdScreen.builder,
@@ -49,6 +52,7 @@ class AppRoutes {
         dashboardAfterCheckInScreen: DashboardAfterCheckInScreen.builder,
         checkInScreen: CheckInScreen.builder,
         chatsScreen: ChatsScreen.builder,
+        wayFinderScreen: WayFinderScreen.builder,
 
         // chatsScreenOneScreen: ChatsScreenOneScreen.builder,
         // chatsScreenTwoScreen: ChatsScreenTwoScreen.builder,

@@ -21,7 +21,7 @@ class List1ItemWidget extends StatelessWidget {
   void subStationCheckIn() {
     FirebaseFirestoreService.stationCheckIn(
         location, list1ItemModelObj.concourse.toString());
-    NavigatorService.pushNamed(AppRoutes.dashboardAfterCheckInScreen);
+    NavigatorService.pushNamed(AppRoutes.wayFinderScreen);
   }
 
   @override
