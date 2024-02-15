@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/firebase_options.dart';
+import 'package:flutter_application_1/presentation/substations_before_check_in_screen/provider/substations_before_check_in_provider.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -90,7 +91,9 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => ThemeProvider()),
-            ChangeNotifierProvider(create: (_) => FirebaseProvider())
+            ChangeNotifierProvider(create: (_) => FirebaseProvider()),
+            ChangeNotifierProvider(
+                create: (_) => SubstationsBeforeCheckInProvider())
           ],
           child: Consumer<ThemeProvider>(
             builder: (context, provider, child) {

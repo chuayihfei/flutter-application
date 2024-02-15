@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dart';
-import 'package:flutter_application_1/presentation/dashboard_before_check_in_page/dashboard_before_check_in_page.dart';
+import 'package:flutter_application_1/presentation/substations_before_check_in_screen/substations_before_check_in_screen.dart';
+import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/models/list_item_model.dart';
+import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/widget/list_item_widget.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_trailing_image.dart';
@@ -51,7 +54,7 @@ class DashboardBeforeCheckInScreenState
                 child: SingleChildScrollView(
                   child: Container(
                     margin: EdgeInsets.only(bottom: 59.v),
-                    padding: EdgeInsets.symmetric(horizontal: 16.h),
+                    padding: EdgeInsets.symmetric(horizontal: 20.h),
                     child: Column(
                       children: [
                         _buildStatusBar(context),
@@ -73,643 +76,7 @@ class DashboardBeforeCheckInScreenState
                           ),
                         ),
                         SizedBox(height: 36.v),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Container(
-                            height: 719.v,
-                            width: 242.h,
-                            margin: EdgeInsets.only(right: 26.h),
-                            child: Stack(
-                              alignment: Alignment.topCenter,
-                              children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 71.h),
-                                    child: SizedBox(
-                                      height: 719.v,
-                                      child: VerticalDivider(
-                                        width: 5.h,
-                                        thickness: 5.v,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        height: 29.adaptSize,
-                                        width: 29.adaptSize,
-                                        decoration: BoxDecoration(
-                                          color: theme.colorScheme.onPrimary,
-                                          borderRadius: BorderRadius.circular(
-                                            14.h,
-                                          ),
-                                          border: Border.all(
-                                            color: appTheme.black900,
-                                            width: 3.h,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 12.h,
-                                          top: 2.v,
-                                        ),
-                                        child: Text(
-                                          "lbl_punggol".tr,
-                                          style: theme.textTheme.headlineSmall,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 30.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              margin:
-                                                  EdgeInsets.only(bottom: 1.v),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 14.h,
-                                                top: 3.v,
-                                              ),
-                                              child: Text(
-                                                "lbl_sengkang".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 15.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 29.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 11.h),
-                                              child: Text(
-                                                "lbl_buangkok".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 17.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 42.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 12.h),
-                                              child: Text(
-                                                "lbl_hougang".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 16.v),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 2.v),
-                                              child: Text(
-                                                "lbl_1_3".tr,
-                                                style: CustomTextStyles
-                                                    .headlineSmallBlack900,
-                                              ),
-                                            ),
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              margin:
-                                                  EdgeInsets.only(left: 24.h),
-                                              decoration: BoxDecoration(
-                                                color: appTheme.redA700,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 11.h,
-                                                bottom: 2.v,
-                                              ),
-                                              child: Text(
-                                                "lbl_kovan".tr,
-                                                style: CustomTextStyles
-                                                    .headlineSmallBlack900,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 16.v),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 2.v),
-                                              child: Text(
-                                                "lbl_3_3".tr,
-                                                style: CustomTextStyles
-                                                    .headlineSmallBlack900,
-                                              ),
-                                            ),
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              margin:
-                                                  EdgeInsets.only(left: 19.h),
-                                              decoration: BoxDecoration(
-                                                color: appTheme.greenA700,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 13.h,
-                                                top: 2.v,
-                                              ),
-                                              child: Text(
-                                                "lbl_serangoon".tr,
-                                                style: CustomTextStyles
-                                                    .headlineSmallBlack900,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 14.v),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 3.v),
-                                              child: Text(
-                                                "lbl_2_3".tr,
-                                                style: CustomTextStyles
-                                                    .headlineSmallBlack900,
-                                              ),
-                                            ),
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              margin:
-                                                  EdgeInsets.only(left: 19.h),
-                                              decoration: BoxDecoration(
-                                                color: appTheme.orange700,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 10.h,
-                                                top: 2.v,
-                                                bottom: 1.v,
-                                              ),
-                                              child: Text(
-                                                "lbl_woodleigh".tr,
-                                                style: CustomTextStyles
-                                                    .headlineSmallBlack900,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 17.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 4.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 11.h),
-                                              child: Text(
-                                                "lbl_potong_pasir".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 17.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 22.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 11.h),
-                                              child: Text(
-                                                "lbl_boon_keng".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 17.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 15.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 13.h),
-                                              child: Text(
-                                                "lbl_farrer_road".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 15.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 30.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              margin: EdgeInsets.only(top: 1.v),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 10.h,
-                                                bottom: 3.v,
-                                              ),
-                                              child: Text(
-                                                "lbl_little_india".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 17.v),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            height: 29.adaptSize,
-                                            width: 29.adaptSize,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  theme.colorScheme.onPrimary,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                14.h,
-                                              ),
-                                              border: Border.all(
-                                                color: appTheme.black900,
-                                                width: 3.h,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 11.h),
-                                            child: Text(
-                                              "lbl_dhoby_ghaut".tr,
-                                              style:
-                                                  theme.textTheme.headlineSmall,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 17.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 20.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 10.h),
-                                              child: Text(
-                                                "lbl_clark_quay".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 16.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 23.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 12.h,
-                                                bottom: 2.v,
-                                              ),
-                                              child: Text(
-                                                "lbl_chinatown".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(height: 14.v),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 3.h),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              height: 29.adaptSize,
-                                              width: 29.adaptSize,
-                                              margin: EdgeInsets.only(top: 2.v),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    theme.colorScheme.onPrimary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  14.h,
-                                                ),
-                                                border: Border.all(
-                                                  color: appTheme.black900,
-                                                  width: 3.h,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 9.h,
-                                                bottom: 4.v,
-                                              ),
-                                              child: Text(
-                                                "lbl_outram_park".tr,
-                                                style: theme
-                                                    .textTheme.headlineSmall,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: 1.h),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          height: 29.adaptSize,
-                                          width: 29.adaptSize,
-                                          margin: EdgeInsets.only(top: 3.v),
-                                          decoration: BoxDecoration(
-                                            color: theme.colorScheme.onPrimary,
-                                            borderRadius: BorderRadius.circular(
-                                              14.h,
-                                            ),
-                                            border: Border.all(
-                                              color: appTheme.black900,
-                                              width: 3.h,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 10.h,
-                                            bottom: 5.v,
-                                          ),
-                                          child: Text(
-                                            "lbl_harbourfront".tr,
-                                            style:
-                                                theme.textTheme.headlineSmall,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        buildListMap(context),
                       ],
                     ),
                   ),
@@ -789,8 +156,72 @@ class DashboardBeforeCheckInScreenState
   /// Section Widget
   Widget _buildCard(BuildContext context) {
     return Container(
-      color: Colors.purple,
+      color: Colors.green,
     );
+  }
+
+  Widget buildListMap(BuildContext context) {
+    return Align(
+        alignment: Alignment.centerRight,
+        child: Container(
+            height: 635.v,
+            width: 350.h,
+            margin: EdgeInsets.only(left: 100.h),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 80.h),
+                    child: SizedBox(
+                      height: 635.v,
+                      child: VerticalDivider(
+                        width: 5.h,
+                        thickness: 5.v,
+                      ),
+                    ),
+                  ),
+                ),
+                Consumer<DashboardBeforeCheckInProvider>(
+                    builder: (context, provider, child) {
+                  return ListView.separated(
+                    itemCount: provider
+                        .dashboardBeforeCheckInModelObj.listItemList.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 10),
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('locations')
+                              .doc(provider.dashboardBeforeCheckInModelObj
+                                  .listItemList[index].name)
+                              .snapshots(),
+                          builder: (context,
+                              AsyncSnapshot<DocumentSnapshot> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            }
+                            ListItemModel model = provider
+                                .dashboardBeforeCheckInModelObj
+                                .listItemList[index];
+                            return ListItemWidget(
+                                model,
+                                (snapshot.data!.data()
+                                    as Map<String, dynamic>)['capacity'],
+                                (snapshot.data!.data() as Map<String, dynamic>)[
+                                    'number of people'],
+                                (snapshot.data!.data()
+                                    as Map<String, dynamic>)['available']);
+                          });
+                    },
+                  );
+                })
+              ],
+            )));
   }
 
   /// Section Widget
@@ -821,7 +252,7 @@ class DashboardBeforeCheckInScreenState
   ) {
     switch (currentRoute) {
       case AppRoutes.dahsboardBeforeCheckInPage:
-        return DahsboardBeforeCheckInPage.builder(context);
+        return DashboardBeforeCheckInScreen.builder(context);
       case AppRoutes.chatsScreen:
         return ChatsScreen.builder(context);
       default:

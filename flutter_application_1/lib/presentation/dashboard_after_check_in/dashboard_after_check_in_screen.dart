@@ -7,8 +7,6 @@ import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dar
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/models/list_item_model.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/provider/dashboard_after_check_in_provider.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/widgets/list_item_widget.dart';
-import 'package:flutter_application_1/presentation/dashboard_before_check_in_page/dashboard_before_check_in_page.dart';
-import 'package:flutter_application_1/provider/firebase_provider.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/services/notification_service.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
@@ -41,8 +39,6 @@ class DashboardAfterCheckInScreenState
     extends State<DashboardAfterCheckInScreen> with WidgetsBindingObserver {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   final notificationService = NotificationService();
-  // ignore: prefer_typing_uninitialized_variables
-  var user;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -68,8 +64,6 @@ class DashboardAfterCheckInScreenState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    user = Provider.of<FirebaseProvider>(context, listen: false)
-        .getUserById(FirebaseAuth.instance.currentUser!.uid);
     notificationService.firebaseNotification(context);
   }
 
@@ -110,8 +104,8 @@ class DashboardAfterCheckInScreenState
     String currentRoute,
   ) {
     switch (currentRoute) {
-      case AppRoutes.dahsboardBeforeCheckInPage:
-        return DahsboardBeforeCheckInPage.builder(context);
+      case AppRoutes.dashboardBeforeCheckInScreen:
+        return DashboardAfterCheckInScreen.builder(context);
       case AppRoutes.chatsScreen:
         return ChatsScreen.builder(context);
       default:

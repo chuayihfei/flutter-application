@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/chats_screen/provider/chats_screen_provider.dart';
 import 'package:flutter_application_1/presentation/chats_screen/widget/chat_item.dart';
-import 'package:flutter_application_1/presentation/dashboard_before_check_in_page/dashboard_before_check_in_page.dart';
+import 'package:flutter_application_1/presentation/substations_before_check_in_screen/substations_before_check_in_screen.dart';
+import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/dashboard_before_check_in_screen.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
 import 'package:flutter_application_1/screens/chat/new_chat_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
@@ -220,8 +221,8 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
     String currentRoute,
   ) {
     switch (currentRoute) {
-      case AppRoutes.dahsboardBeforeCheckInPage:
-        return DahsboardBeforeCheckInPage.builder(context);
+      case AppRoutes.dashboardBeforeCheckInScreen:
+        return DashboardBeforeCheckInScreen.builder(context);
       case AppRoutes.chatsScreen:
         return ChatsScreen.builder(context);
       default:

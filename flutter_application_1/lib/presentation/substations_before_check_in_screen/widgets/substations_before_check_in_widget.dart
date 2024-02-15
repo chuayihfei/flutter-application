@@ -1,18 +1,22 @@
 import 'package:flutter_application_1/core/app_export.dart';
 
-import '../models/list_item_model.dart';
+import '../models/before_substation_list_model.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class ListItemWidget extends StatelessWidget {
-  ListItemWidget(
-    this.listItemModelObj, {
+class BeforeSubstationListWidget extends StatelessWidget {
+  BeforeSubstationListWidget(
+    this.listItemModelObj,
+    this.color,
+    this.location, {
     Key? key,
   }) : super(
           key: key,
         );
 
-  ListItemModel listItemModelObj;
+  BeforeSubstationListModel listItemModelObj;
+  Color color;
+  String location;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +27,10 @@ class ListItemWidget extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 92.v,
+              height: 88.v,
               width: 108.h,
               decoration: BoxDecoration(
-                color: appTheme.greenA700,
+                color: color,
                 borderRadius: BorderRadius.circular(
                   10.h,
                 ),
@@ -44,7 +48,7 @@ class ListItemWidget extends StatelessWidget {
               ),
             ),
             Text(
-              listItemModelObj.concourse!,
+              listItemModelObj.name!,
               style: theme.textTheme.titleMedium,
             ),
           ],
