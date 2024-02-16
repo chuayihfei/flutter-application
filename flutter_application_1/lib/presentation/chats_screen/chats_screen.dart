@@ -1,13 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/chats_screen/provider/chats_screen_provider.dart';
 import 'package:flutter_application_1/presentation/chats_screen/widget/chat_item.dart';
-import 'package:flutter_application_1/presentation/substations_before_check_in_screen/substations_before_check_in_screen.dart';
+import 'package:flutter_application_1/presentation/dashboard_after_check_in/dashboard_after_check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/dashboard_before_check_in_screen.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
-import 'package:flutter_application_1/screens/chat/new_chat_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/services/notification_service.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
@@ -38,6 +36,7 @@ class ChatsScreen extends StatefulWidget {
 class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
   final notificationService = NotificationService();
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+  bool? checkdIn;
 
   @override
   void initState() {
@@ -45,6 +44,11 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
 
     Provider.of<FirebaseProvider>(context, listen: false).getAllChats();
+    Provider.of<FirebaseProvider>(context, listen: false)
+        .getUserById(FirebaseAuth.instance.currentUser!.uid)
+        .then((value) {
+      checkdIn = value?.checkedIn;
+    });
     notificationService.firebaseNotification(context);
   }
 
@@ -166,10 +170,7 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
             buttonStyle: CustomButtonStyles.fillPrimary,
             buttonTextStyle: CustomTextStyles.titleLargeRobotoOnPrimary,
             onPressed: () {
-              Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) => const NewChatScreen()));
+              NavigatorService.pushNamed(AppRoutes.newChatScreen);
             },
           ),
         ],
@@ -186,10 +187,16 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
         separatorBuilder: (context, index) => const SizedBox(height: 10),
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
-        itemBuilder: (context, index) => value.chats[index].usersId
-                .contains(FirebaseAuth.instance.currentUser?.uid)
-            ? ChatItem(chat: value.chats[index])
-            : const SizedBox(),
+        itemBuilder: (context, index) {
+          // if (value.users[index].uid ==
+          //     FirebaseAuth.instance.currentUser?.uid) {
+          //   user = value.users[index];
+          // }
+          return value.chats[index].usersId
+                  .contains(FirebaseAuth.instance.currentUser?.uid)
+              ? ChatItem(chat: value.chats[index])
+              : const SizedBox();
+        },
       );
     });
   }
@@ -198,7 +205,12 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
   Widget _buildBottomAppBar(BuildContext context) {
     return CustomBottomAppBar(
       onChanged: (BottomBarEnum type) {
-        NavigatorService.pushNamed(getCurrentRoute(type));
+        switch (type) {
+          case BottomBarEnum.Dashboard:
+            NavigatorService.goBack();
+          case BottomBarEnum.Chats:
+            NavigatorService.pushNamed(getCurrentRoute(type));
+        }
       },
     );
   }
@@ -207,7 +219,13 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Dashboard:
-        return AppRoutes.dahsboardBeforeCheckInPage;
+      // {
+      //   if (!checkdIn!) {
+      //     return AppRoutes.dashboardBeforeCheckInScreen;
+      //   } else {
+      //     return AppRoutes.dashboardAfterCheckInScreen;
+      //   }
+      // }
       case BottomBarEnum.Chats:
         return AppRoutes.chatsScreen;
       default:
@@ -223,6 +241,8 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
     switch (currentRoute) {
       case AppRoutes.dashboardBeforeCheckInScreen:
         return DashboardBeforeCheckInScreen.builder(context);
+      case AppRoutes.dashboardAfterCheckInScreen:
+        return DashboardAfterCheckInScreen.builder(context);
       case AppRoutes.chatsScreen:
         return ChatsScreen.builder(context);
       default:

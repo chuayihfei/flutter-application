@@ -1,19 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/app_export.dart';
+import 'package:flutter_application_1/presentation/new_chat_screen/provider/new_chat_screen_provider.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
-import 'package:flutter_application_1/screens/chat/new_group_chat_screen.dart';
-import 'package:flutter_application_1/screens/chat/search_screen.dart';
+import 'package:flutter_application_1/presentation/search_screen/search_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/widgets/private_user_item.dart';
-import 'package:provider/provider.dart';
 
 class NewChatScreen extends StatefulWidget {
   const NewChatScreen({super.key});
 
   @override
   State<NewChatScreen> createState() => NewChatScreenState();
+  static Widget builder(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => NewChatScreenProvider(),
+      child: const NewChatScreen(),
+    );
+  }
 }
 
 class NewChatScreenState extends State<NewChatScreen>
@@ -62,9 +67,7 @@ class NewChatScreenState extends State<NewChatScreen>
   }
 
   void addNewGroupChat() async {
-    Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.push(context,
-        CupertinoPageRoute(builder: (context) => const NewGroupChatScreen()));
+    NavigatorService.pushNamed(AppRoutes.newGroupChatScreen);
   }
 
   @override

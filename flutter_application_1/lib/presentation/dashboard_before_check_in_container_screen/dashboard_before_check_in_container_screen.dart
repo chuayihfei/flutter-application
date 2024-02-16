@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_container_screen/provider/dashboard_before_check_in_container_provider.dart';
-import 'package:flutter_application_1/presentation/substations_before_check_in_screen/substations_before_check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/dashboard_before_check_in_screen.dart';
 import 'package:flutter_application_1/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter_application_1/widgets/custom_floating_button.dart';

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dart';
-import 'package:flutter_application_1/presentation/substations_before_check_in_screen/substations_before_check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/models/list_item_model.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/widget/list_item_widget.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';

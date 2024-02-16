@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/chat.dart';
-import 'package:flutter_application_1/screens/chat/chat_screen.dart';
+import 'package:flutter_application_1/presentation/chat_screen/chat_screen.dart';
 
 class ChatItem extends StatefulWidget {
   const ChatItem({super.key, required this.chat});

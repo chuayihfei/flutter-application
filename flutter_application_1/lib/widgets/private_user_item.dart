@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants.dart';
 import 'package:flutter_application_1/model/chat.dart';
-import 'package:flutter_application_1/screens/chat/chat_screen.dart';
+import 'package:flutter_application_1/presentation/chat_screen/chat_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;

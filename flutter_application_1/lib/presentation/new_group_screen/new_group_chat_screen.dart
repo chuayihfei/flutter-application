@@ -1,15 +1,12 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/constants.dart';
 import 'package:flutter_application_1/model/user.dart';
+import 'package:flutter_application_1/presentation/new_group_screen/provider/new_group_chat_provider.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
-import 'package:flutter_application_1/screens/chat/chat_screen.dart';
-import 'package:flutter_application_1/screens/chat/search_screen.dart';
+import 'package:flutter_application_1/presentation/chat_screen/chat_screen.dart';
+import 'package:flutter_application_1/presentation/search_screen/search_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/widgets/custom_text_form_field.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +17,12 @@ class NewGroupChatScreen extends StatefulWidget {
 
   @override
   State<NewGroupChatScreen> createState() => NewGroupChatScreenState();
+  static Widget builder(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => NewGroupChatProvider(),
+      child: const NewGroupChatScreen(),
+    );
+  }
 }
 
 class NewGroupChatScreenState extends State<NewGroupChatScreen>

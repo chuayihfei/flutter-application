@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/substations_before_check_in_screen/substations_before_check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/models/list_item_model.dart';
 
+// ignore: must_be_immutable
 class ListItemWidget extends StatelessWidget {
   ListItemWidget(
     this.listItemModelObj,
