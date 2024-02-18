@@ -73,5 +73,7 @@ class ImageConstant {
 
   static String imgMicrophone = '$imagePath/img_microphone.svg';
 
+  static String imgSettings = '$imagePath/img_settings.svg';
+
   static String imageNotFound = 'assets/images/image_not_found.png';
 }
