@@ -11,6 +11,7 @@ import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart'
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/dashboard_after_check_in_screen.dart';
+import 'package:flutter_application_1/widgets/settings_drawer.dart';
 
 class WayFinderScreen extends StatefulWidget {
   const WayFinderScreen({Key? key}) : super(key: key);
@@ -82,6 +83,7 @@ class WayFinderScreenState extends State<WayFinderScreen> {
                       onUnityMessage: onUnityMessage,
                       fullscreen: false,
                     )))),
+        drawer: SettingsDrawer(),
         bottomNavigationBar: _buildBottomAppBar(context),
         floatingActionButton: CustomFloatingButton(
           height: 65,
