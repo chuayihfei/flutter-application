@@ -7,6 +7,7 @@ import 'package:flutter_application_1/presentation/chats_screen/chats_screen.dar
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/models/list_item_model.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/provider/dashboard_after_check_in_provider.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/widgets/list_item_widget.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/services/notification_service.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
@@ -136,6 +137,11 @@ class DashboardAfterCheckInScreenState
             horizontal: 26.h,
             vertical: 3.v,
           ),
+          onTap: () {
+            FirebaseAuthService.logOut();
+            NavigatorService.pushNamedAndRemoveUntil(
+                AppRoutes.loginWithEmailIdScreen);
+          },
         ),
       ],
     );

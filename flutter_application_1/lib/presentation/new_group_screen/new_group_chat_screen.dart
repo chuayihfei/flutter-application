@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants.dart';
+import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/model/user.dart';
 import 'package:flutter_application_1/presentation/new_group_screen/provider/new_group_chat_provider.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
 import 'package:flutter_application_1/presentation/chat_screen/chat_screen.dart';
 import 'package:flutter_application_1/presentation/search_screen/search_screen.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/widgets/custom_text_form_field.dart';
 import 'package:provider/provider.dart';
@@ -109,7 +111,11 @@ class NewGroupChatScreenState extends State<NewGroupChatScreen>
             icon: const Icon(Icons.search, color: Colors.black),
           ),
           IconButton(
-            onPressed: () => logOut(),
+            onPressed: () {
+              FirebaseAuthService.logOut();
+              NavigatorService.pushNamedAndRemoveUntil(
+                  AppRoutes.loginWithEmailIdScreen);
+            },
             icon: const Icon(Icons.logout, color: Colors.black),
           ),
         ],

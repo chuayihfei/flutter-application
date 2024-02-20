@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_container_screen/dashboard_before_check_in_container_screen.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
@@ -120,6 +121,11 @@ class CheckInScreenState extends State<CheckInScreen> {
             horizontal: 26.h,
             vertical: 3.v,
           ),
+          onTap: () {
+            FirebaseAuthService.logOut();
+            NavigatorService.pushNamedAndRemoveUntil(
+                AppRoutes.loginWithEmailIdScreen);
+          },
         ),
       ],
     );

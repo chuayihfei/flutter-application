@@ -12,10 +12,8 @@ class LoginWithEmailIdProvider extends ChangeNotifier {
 
   LoginWithEmailIdModel loginWithEmailIdModelObj = LoginWithEmailIdModel();
 
-  @override
-  void dispose() {
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 }

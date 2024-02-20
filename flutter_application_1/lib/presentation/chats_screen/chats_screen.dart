@@ -6,6 +6,7 @@ import 'package:flutter_application_1/presentation/chats_screen/widget/chat_item
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/dashboard_after_check_in_screen.dart';
 import 'package:flutter_application_1/presentation/dashboard_before_check_in_screen/dashboard_before_check_in_screen.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/services/notification_service.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
@@ -132,6 +133,11 @@ class ChatsScreenState extends State<ChatsScreen> with WidgetsBindingObserver {
             horizontal: 19.h,
             vertical: 3.v,
           ),
+          onTap: () {
+            FirebaseAuthService.logOut();
+            NavigatorService.pushNamedAndRemoveUntil(
+                AppRoutes.loginWithEmailIdScreen);
+          },
         ),
       ],
     );

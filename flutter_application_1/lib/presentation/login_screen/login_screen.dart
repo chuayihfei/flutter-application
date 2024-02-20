@@ -33,6 +33,8 @@ class LoginWithEmailIdScreenState extends State<LoginWithEmailIdScreen> {
   @override
   void initState() {
     super.initState();
+    LoginWithEmailIdProvider.emailController.text = "";
+    LoginWithEmailIdProvider.passwordController.text = "";
   }
 
   void login() async {

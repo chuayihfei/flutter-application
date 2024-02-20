@@ -5,6 +5,7 @@ import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/new_chat_screen/provider/new_chat_screen_provider.dart';
 import 'package:flutter_application_1/provider/firebase_provider.dart';
 import 'package:flutter_application_1/presentation/search_screen/search_screen.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 import 'package:flutter_application_1/widgets/private_user_item.dart';
 
@@ -81,7 +82,11 @@ class NewChatScreenState extends State<NewChatScreen>
             icon: const Icon(Icons.search, color: Colors.black),
           ),
           IconButton(
-            onPressed: () => logOut(),
+            onPressed: () {
+              FirebaseAuthService.logOut();
+              NavigatorService.pushNamedAndRemoveUntil(
+                  AppRoutes.loginWithEmailIdScreen);
+            },
             icon: const Icon(Icons.logout, color: Colors.black),
           ),
         ],

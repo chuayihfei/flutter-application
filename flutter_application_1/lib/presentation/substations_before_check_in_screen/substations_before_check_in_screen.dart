@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/substations_before_check_in_screen/provider/substations_before_check_in_provider.dart';
 import 'package:flutter_application_1/presentation/substations_before_check_in_screen/widgets/substations_before_check_in_widget.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_leading_image.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_title.dart';
 import 'package:flutter_application_1/widgets/app_bar/appbar_trailing_image.dart';
@@ -116,6 +117,11 @@ class DahsboardBeforeCheckInPageState
             horizontal: 26.h,
             vertical: 3.v,
           ),
+          onTap: () {
+            FirebaseAuthService.logOut();
+            NavigatorService.pushNamedAndRemoveUntil(
+                AppRoutes.loginWithEmailIdScreen);
+          },
         ),
       ],
     );
