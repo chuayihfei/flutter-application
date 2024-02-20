@@ -7,6 +7,9 @@ public class NavigationManager : MonoBehaviour
     [SerializeField]
     private GameObject navTargetObj;
 
+    [SerializeField]
+    private GameObject navTargetArea;
+
     public Vector3 TargetPosition { get; set; } = Vector3.zero;
 
     public NavMeshPath CalculatedPath { get; private set; }
@@ -28,6 +31,7 @@ public class NavigationManager : MonoBehaviour
 
             //move target object to new position
             navTargetObj.transform.position = TargetPosition;
+            navTargetArea.transform.position = TargetPosition;
         }
     }
 }

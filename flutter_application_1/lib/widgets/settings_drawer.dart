@@ -30,60 +30,67 @@ class SettingsDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.deepPurple,
-            ),
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              height: 50,
-              child: const Text(
-                'Settings',
-                style: TextStyle(color: Colors.white),
+    final padding = MediaQuery.of(context).padding;
+    return Scaffold(
+      body: const Center(),
+      drawer: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.only(top: padding.top),
+            children: [
+              DrawerHeader(
+                decoration: const BoxDecoration(
+                  color: Colors.deepPurple,
+                ),
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  height: 50,
+                  child: const Text(
+                    'Settings',
+                    style: TextStyle(color: Color.fromARGB(255, 196, 176, 176)),
+                  ),
+                ),
               ),
-            ),
+              ListTile(
+                title: const Text('Way Finder'),
+                selected: _selectedIndex == 0,
+                onTap: () {
+                  //show stuff
+                  //close drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text('Help'),
+                selected: _selectedIndex == 1,
+                onTap: () {
+                  //show stuff
+                  //close drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text('Line Settings'),
+                selected: _selectedIndex == 2,
+                onTap: () {
+                  //show stuff
+                  //close drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text('Change Destination'),
+                selected: _selectedIndex == 3,
+                onTap: () {
+                  //show stuff
+                  //close drawer
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
-          ListTile(
-            title: const Text('Way Finder'),
-            selected: _selectedIndex == 0,
-            onTap: () {
-              //show stuff
-              //close drawer
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Help'),
-            selected: _selectedIndex == 1,
-            onTap: () {
-              //show stuff
-              //close drawer
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Line Settings'),
-            selected: _selectedIndex == 2,
-            onTap: () {
-              //show stuff
-              //close drawer
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Change Destination'),
-            selected: _selectedIndex == 3,
-            onTap: () {
-              //show stuff
-              //close drawer
-              Navigator.pop(context);
-            },
-          ),
-        ],
+        ),
       ),
     );
   }
