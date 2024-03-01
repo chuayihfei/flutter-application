@@ -14,6 +14,8 @@ public class NavigationManager : MonoBehaviour
 
     public NavMeshPath CalculatedPath { get; private set; }
 
+    public bool ReachedDest = false;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -161,5 +161,18 @@ class WayFinderScreenState extends State<WayFinderScreen> {
   }
 
   //Unity reply message handler
-  void onUnityMessage(message) async {}
+  void onUnityMessage(message) async {
+    log("Received message from Unity: ${message.toString()}");
+
+    switch (message) {
+      case 'VideoCube':
+        {
+          //does smth
+        }
+      case 'DestinationAreaCube':
+        {
+          //destination reached
+        }
+    }
+  }
 }
