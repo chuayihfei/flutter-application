@@ -83,7 +83,22 @@ class WayFinderScreenState extends State<WayFinderScreen> {
                       onUnityMessage: onUnityMessage,
                       fullscreen: false,
                     )))),
-        drawer: SettingsDrawer(),
+        drawer: SettingsDrawer(
+          sendMessageToUnity: (String message) {
+            switch (message) {
+              case 'Toggle Line Settings Panel':
+                {
+                  _unityWidgetController?.postMessage(
+                      'LineSettingsToggle', 'activeSetting', message);
+                }
+              case 'Help UI':
+                {
+                  _unityWidgetController?.postMessage(
+                      'HelpUIToggle', 'activeSetting', message);
+                }
+            }
+          },
+        ),
         bottomNavigationBar: _buildBottomAppBar(context),
         floatingActionButton: CustomFloatingButton(
           height: 65,

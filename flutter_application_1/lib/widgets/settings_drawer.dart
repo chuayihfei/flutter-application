@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_application_1/core/app_export.dart';
+import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
 class SettingsDrawer extends StatelessWidget {
-  SettingsDrawer({
-    Key? key,
-  }) : super(key: key);
+  //final UnityWidgetController? controller;
+  final Function(String) sendMessageToUnity;
+  //@required this.controller
+  SettingsDrawer({required this.sendMessageToUnity, Key? key})
+      : super(key: key);
+
+  //static const platform =
+  // MethodChannel('com.example.flutter_unity_integration/flutter');
 
   int _selectedIndex = 0;
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -35,7 +44,7 @@ class SettingsDrawer extends StatelessWidget {
       child: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: <Widget>[
+          children: [
             DrawerHeader(
               decoration: const BoxDecoration(
                 color: Colors.deepPurple,
@@ -45,7 +54,7 @@ class SettingsDrawer extends StatelessWidget {
                 height: 50,
                 child: const Text(
                   'Settings',
-                  style: TextStyle(color: Color.fromARGB(255, 196, 176, 176)),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -63,6 +72,7 @@ class SettingsDrawer extends StatelessWidget {
               selected: _selectedIndex == 1,
               onTap: () {
                 //show stuff
+                sendMessageToUnity('Help UI');
                 //close drawer
                 Navigator.pop(context);
               },
@@ -72,6 +82,11 @@ class SettingsDrawer extends StatelessWidget {
               selected: _selectedIndex == 2,
               onTap: () {
                 //show stuff
+                log('line settings pressed');
+                //platform.invokeMethod('openUnityWidget');
+                //controller?.postMessage('LineSettingsPanel', 'Toggle',
+                // 'Toggle Line Settings Panel');
+                sendMessageToUnity('Toggle Line Settings Panel');
                 //close drawer
                 Navigator.pop(context);
               },
