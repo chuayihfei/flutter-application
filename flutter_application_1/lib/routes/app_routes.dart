@@ -52,7 +52,6 @@ class AppRoutes {
         dashboardAfterCheckInScreen: DashboardAfterCheckInScreen.builder,
         checkInScreen: CheckInScreen.builder,
         chatsScreen: ChatsScreen.builder,
-        wayFinderScreen: WayFinderScreen.builder,
 
         // chatsScreenOneScreen: ChatsScreenOneScreen.builder,
         // chatsScreenTwoScreen: ChatsScreenTwoScreen.builder,

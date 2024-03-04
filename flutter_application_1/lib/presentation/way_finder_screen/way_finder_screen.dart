@@ -14,17 +14,12 @@ import 'package:flutter_application_1/presentation/dashboard_after_check_in/dash
 import 'package:flutter_application_1/widgets/settings_drawer.dart';
 
 class WayFinderScreen extends StatefulWidget {
-  const WayFinderScreen({Key? key}) : super(key: key);
+  const WayFinderScreen({super.key, required this.destination});
 
+
+  final String destination;
   @override
   State<WayFinderScreen> createState() => WayFinderScreenState();
-
-  static Widget builder(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => WayFinderProvider(),
-      child: const WayFinderScreen(),
-    );
-  }
 }
 
 class WayFinderScreenState extends State<WayFinderScreen> {
@@ -56,6 +51,18 @@ class WayFinderScreenState extends State<WayFinderScreen> {
     if (sceneInfo != null) {
       log('Received scene loaded from unity: ${sceneInfo.name}');
       log('Received scene loaded from unity buildIndex: ${sceneInfo.buildIndex}');
+    }
+
+    switch(widget.destination) {
+      case 'Concourse':{
+        _unityWidgetController?.postMessage('LineSettings','SetDestinationPoint','5');
+      }
+      case 'Platform':{
+        _unityWidgetController?.postMessage('LineSettings','SetDestinationPoint','6');
+      }
+      case 'Ground':{
+        _unityWidgetController?.postMessage('LineSettings','SetDestinationPoint','15');
+      }
     }
   }
 
