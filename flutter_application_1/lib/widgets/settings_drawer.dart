@@ -32,7 +32,11 @@ class SettingsDrawer extends StatelessWidget {
       style: optionStyle,
     ),
     Text(
-      'Index 3: Change Destination',
+      'Index 3: Show Minimap',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 4: Reset Environment',
       style: optionStyle,
     ),
   ];
@@ -92,10 +96,21 @@ class SettingsDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('Change Destination'),
+              title: const Text('Show Minimap'),
               selected: _selectedIndex == 3,
               onTap: () {
                 //show stuff
+                sendMessageToUnity('Show Minimap');
+                //close drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Reset Environment'),
+              selected: _selectedIndex == 4,
+              onTap: () {
+                //show stuff
+                sendMessageToUnity('Reset Environment');
                 //close drawer
                 Navigator.pop(context);
               },

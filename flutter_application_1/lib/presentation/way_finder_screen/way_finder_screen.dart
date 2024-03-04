@@ -16,7 +16,6 @@ import 'package:flutter_application_1/widgets/settings_drawer.dart';
 class WayFinderScreen extends StatefulWidget {
   const WayFinderScreen({super.key, required this.destination});
 
-
   final String destination;
   @override
   State<WayFinderScreen> createState() => WayFinderScreenState();
@@ -53,16 +52,22 @@ class WayFinderScreenState extends State<WayFinderScreen> {
       log('Received scene loaded from unity buildIndex: ${sceneInfo.buildIndex}');
     }
 
-    switch(widget.destination) {
-      case 'Concourse':{
-        _unityWidgetController?.postMessage('LineSettings','SetDestinationPoint','5');
-      }
-      case 'Platform':{
-        _unityWidgetController?.postMessage('LineSettings','SetDestinationPoint','6');
-      }
-      case 'Ground':{
-        _unityWidgetController?.postMessage('LineSettings','SetDestinationPoint','15');
-      }
+    switch (widget.destination) {
+      case 'Concourse':
+        {
+          _unityWidgetController?.postMessage(
+              'LineSettings', 'SetDestinationPoint', '5');
+        }
+      case 'Platform':
+        {
+          _unityWidgetController?.postMessage(
+              'LineSettings', 'SetDestinationPoint', '6');
+        }
+      case 'Ground':
+        {
+          _unityWidgetController?.postMessage(
+              'LineSettings', 'SetDestinationPoint', '15');
+        }
     }
   }
 
@@ -102,6 +107,16 @@ class WayFinderScreenState extends State<WayFinderScreen> {
                 {
                   _unityWidgetController?.postMessage(
                       'HelpUIToggle', 'activeSetting', message);
+                }
+              case 'Show Minimap':
+                {
+                  _unityWidgetController?.postMessage(
+                      'MinimapToggle', 'activeSetting', message);
+                }
+              case 'Reset Environment':
+                {
+                  _unityWidgetController?.postMessage(
+                      'ResetEnvironment', 'RestartCurrentMap', message);
                 }
             }
           },

@@ -9,8 +9,9 @@ public class RestartNavigation : MonoBehaviour
     [SerializeField]
     private ARSession session;
 
-    public void RestartCurrentMap()
+    public void RestartCurrentMap(string message)
     {
+        Debug.Log($"[log]: Recieved message to {message}");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
         session.Reset();
     }
