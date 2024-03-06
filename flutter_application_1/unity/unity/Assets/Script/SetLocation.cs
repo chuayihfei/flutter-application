@@ -23,7 +23,7 @@ public class SetLocation : MonoBehaviour
 
         //set default start and end destinations
         SetStartPoint(defaultStart);
-        SetDestinationPoint(defaultDestination);
+        //SetDestinationPoint(defaultDestination);
     }
 
     public void SetStartPoint(string startName)

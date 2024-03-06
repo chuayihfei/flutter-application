@@ -91,8 +91,8 @@ class WayFinderScreenState extends State<WayFinderScreen> {
                     width: 370,
                     child: UnityWidget(
                       onUnityCreated: onUnityCreated,
-                      onUnitySceneLoaded: onUnitySceneLoaded,
                       onUnityMessage: onUnityMessage,
+                      onUnitySceneLoaded: onUnitySceneLoaded,
                       fullscreen: false,
                     )))),
         drawer: SettingsDrawer(
