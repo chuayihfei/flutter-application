@@ -13,12 +13,39 @@ public class SetLocation : MonoBehaviour
 
     private TargetHandler targetHandler;
 
+    private string defaultStart = "19";
+    private string defaultDestination = "5";
+
     IEnumerator Start()
     {
         targetHandler = FindAnyObjectByType<TargetHandler>();
         yield return new WaitForEndOfFrame();
+
+        //set default start and end destinations
+        SetStartPoint(defaultStart);
+        SetDestinationPoint(defaultDestination);
     }
 
+    public void SetStartPoint(string startName)
+    {
+        //find value and index in db?
+        int index;
+        int.TryParse(startName, out index);
+        SetDropdownStartPos(index);
+        SetDropdownStartRot(index);
+
+        Debug.Log("[log] Setting start point: " + targetHandler.currentTargetList[index].Name);
+    }
+
+    public void SetDestinationPoint(string destinationName)
+    {
+        int index;
+        int.TryParse(destinationName, out index);
+
+        SetDropdownDestinationPos(index);
+
+        Debug.Log("[log] Setting destination point: " + targetHandler.currentTargetList[index].Name);
+    }
     public void SetDropdownDestinationPos(int selectedValue)
     {
         navigationManager.TargetPosition = GetSelectedTargetPos(selectedValue);

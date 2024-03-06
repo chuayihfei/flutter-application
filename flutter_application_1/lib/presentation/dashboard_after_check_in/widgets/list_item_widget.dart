@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/app_export.dart';
 import 'package:flutter_application_1/presentation/dashboard_after_check_in/models/list_item_model.dart';
+import 'package:flutter_application_1/presentation/way_finder_screen/way_finder_screen.dart';
 import 'package:flutter_application_1/services/firebase_firestore_service.dart';
 
 // ignore: must_be_immutable
@@ -21,7 +22,6 @@ class List1ItemWidget extends StatelessWidget {
   void subStationCheckIn() {
     FirebaseFirestoreService.stationCheckIn(
         location, list1ItemModelObj.concourse.toString());
-    NavigatorService.pushNamed(AppRoutes.dashboardAfterCheckInScreen);
   }
 
   @override
@@ -29,6 +29,9 @@ class List1ItemWidget extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           subStationCheckIn();
+          
+    Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => WayFinderScreen(destination: list1ItemModelObj.concourse.toString())));
         },
         child: SizedBox(
           width: 108.h,

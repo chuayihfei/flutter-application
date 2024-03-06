@@ -22,7 +22,7 @@ public class VideoPlayCollision : MonoBehaviour
         }
     }
 
-    public void PausePlay()
+    public void VideoPausePlay()
     {
         if(videoObject.GetComponent<VideoPlayer>().isPlaying)
         {

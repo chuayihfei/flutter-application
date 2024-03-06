@@ -29,7 +29,7 @@ public class getDistance : MonoBehaviour
     {
         float distance = 0.0f;
 
-        if (path.status != NavMeshPathStatus.PathInvalid)
+        if (!navigationManager.ReachedDest)
         {
             for (int i = 1; i < path.corners.Length; i++)
             {

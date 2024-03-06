@@ -38,7 +38,7 @@ public class DirWarning : MonoBehaviour
     private float getAngle()
     {
         float angle = 0.0f;
-        if (path.status != NavMeshPathStatus.PathInvalid)
+        if (!navigationManager.ReachedDest)
         {
             angle = Vector3.Angle(path.corners[1] - arOrigin.Camera.transform.position, arOrigin.Camera.transform.forward);
 
